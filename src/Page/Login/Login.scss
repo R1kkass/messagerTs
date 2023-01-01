@@ -1,0 +1,31 @@
+@import '../../Styles/Variables.scss';
+
+.Login{
+    width: 40%;
+    display: grid;
+    margin: auto;
+    height: calc(100vh - 100px);
+    align-items: center;
+    justify-content: center;
+    min-width: 500px;
+    div{
+        padding: 200px;
+        border-radius: 10px;
+        background-color: $main-color;
+    }
+    button{
+        background-color: white;
+        color: $main-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        height: 40px;
+        min-width: 40%;
+        font-size: 24px;
+    }
+    h2{
+        color: white;
+        text-align: center;
+    }
+}

@@ -1,0 +1,36 @@
+@import '../../Styles/Variables.scss';
+
+.Main{
+    display: grid;
+    grid-template-columns: .4fr 1fr;
+    min-height: calc(100vh - 60px);
+    &__info{
+        background-color: #0d6efd;
+        color: white;
+        padding-top: 20px;
+        p{
+            font-size: 20px;
+            text-align: center;
+        }
+        display: grid;
+        justify-content: center;
+        
+        
+        img{
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+            height: 200px;
+            border-radius: 50%;
+            width: 200px;
+        }
+    }
+}
+
+.UnAuthorization{
+    display: flex;
+    height: calc(100vh - 60px);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

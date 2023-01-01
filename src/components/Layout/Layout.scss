@@ -1,3 +1,45 @@
+@import "../../Styles/Variables.scss";
+
 .Layout{
-    height: 100px;
+    height: 60px;
+    &__fixed{
+        position: fixed;
+        height: 60px;
+        width: 100%;
+        color: white;
+        background: $main-color;
+        display: flex;
+        align-items: center;
+        padding-left: 20px;
+    }
+    .Link{
+        background-color: rgb(24, 24, 134);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: 0.3s ;
+        margin-left: 10px;
+        
+        border: none;
+        outline: none;
+        &:hover{
+            border-radius: 10px;
+            background-color: white;
+            color: $main-color;
+        }
+        
+    }
+    .activeLink{
+        background-color: white;
+        color: $main-color;
+        border-radius: 5px;
+        text-decoration: none;
+        padding: 10px;
+        transition: 0.3s;
+        margin-left: 10px;
+        &:hover{
+            border-radius: 10px;
+        }
+    }
 }

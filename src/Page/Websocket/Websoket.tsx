@@ -5,18 +5,17 @@ import "./Websocket.scss"
 import {useParams} from "react-router-dom"
 import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from "react-redux";
-import BlockMessage from "./components/BlockMessage/BlockMessage";
-import Loader from "./components/Loader/Loader";
-import {IStateRedux} from "./types/IRef"
+import BlockMessage from "../../components/BlockMessage/BlockMessage";
+import Loader from "../../components/Loader/Loader";
+import {IStateRedux} from "../../types/IRef"
 import { useAuthState } from "react-firebase-hooks/auth";
-import { IUserReducer } from "./components/Layout/Layout";
+import { IUserReducer } from "../../components/Layout/Layout";
+import jwtDecode from "jwt-decode";
+import { IReduceState, IToken } from "../../types/IReduce";
 
 let limit = 0
 
 const Websoket =()=> {
-   const auth = useSelector((state: IUserReducer)=>state.auth.auth)
-    const app  = useSelector((state: IUserReducer)=>state.auth.firebase)
-    const b = useAuthState(auth?.getAuth(app))
     const dispatch = useDispatch()
     const socket = useRef<WebSocket | null>(null)
     const [connected, setConnected] = useState(false)
@@ -24,10 +23,10 @@ const Websoket =()=> {
     const userRef = useRef<HTMLInputElement>(null)
     const [er, setEr] = useState('')
     const [userNameSt, setUserNameSt] = useState('')
+
+    const userToken = useSelector((state:any)=>state.token.token)
+    const userTokenHS:any = localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : ''
     
-    useEffect(()=>{
-      connect()
-    },[])
 
     const { ref, inView, entry } = useInView({
       threshold: 0,
@@ -44,15 +43,18 @@ const Websoket =()=> {
 
     function connect(){
       socket.current = new WebSocket("ws://localhost:5001/con")
-      console.log('f');
+      console.log(userToken); 
       
       socket.current.onopen = ()=>{
+        
+        
           const message = {
             event: "connection",
-            username: localStorage.getItem('user'),
+            username: userTokenHS?.email,
             id: params.id,
             limit: limit
           }
+          console.log(userToken);
           socket.current?.send(JSON.stringify(message))
           setConnected(true);
           setInterval(()=>{
@@ -86,7 +88,7 @@ const Websoket =()=> {
         event: 'message',
         limit: limit,
         text: textRef.current?.value || '',
-        username: b[0]?.email,
+        username: userToken.email,
         date: new Date().toLocaleDateString('RU', options) + " " + new Date().toLocaleTimeString(),
         id: params.id
       }
@@ -106,11 +108,14 @@ const Websoket =()=> {
         limit: limit,
         idDelete: id,
         id: params.id,
-        user: localStorage.getItem('user'),
+        user: userToken.email,
       }
       socket.current?.send(JSON.stringify(message))
     }
 
+    useEffect(()=>{
+      connect()
+    },[])
     
     const [visible, setVisible] = useState(false)
 
@@ -123,17 +128,10 @@ const Websoket =()=> {
       socket.current?.send(JSON.stringify(message))
     }
 
-    if(b[1]){
+    if(localStorage.getItem('token')==null){
       return(
         <div>
-            <input onChange={(e)=>setUserNameSt(e.target.value)} placeholder="login"/>
-            <br/>
-            <input ref={userRef} placeholder="id комнаты" />
-            <br/>
-            <button onClick={()=>{localStorage.setItem('user', userNameSt); connect();}}>
-              Войти
-            </button>
-            {er}
+            <h2>Вы не авторизованы</h2>
       </div>
       )
     }

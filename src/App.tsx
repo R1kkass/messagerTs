@@ -1,4 +1,4 @@
-import Websoket from './Websoket';
+import Websoket from './Page/Websocket/Websoket';
 import React, { useEffect } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Counter from './Page/Counter';
@@ -9,6 +9,7 @@ import * as auth from 'firebase/auth'
 import Login from './Page/Login/Login';
 import Layout from './components/Layout/Layout';
 import { initializeApp} from 'firebase/app';
+import MyRouter from './Page/Routes/MyRoutes';
 
 function App() {
   
@@ -16,14 +17,10 @@ function App() {
 
   return (
       <div className="App">
-        <Layout />
         <BrowserRouter>
-          <Routes>
-            <Route path = "/:id" element={<Websoket/>} />
-            <Route path = "/" element={<Counter/>} />
-            <Route path = "/login" element={<Login/>} />
-          </Routes>
-        </BrowserRouter>
+          <Layout />
+          <MyRouter />
+          </BrowserRouter>
       </div>
   );
 }

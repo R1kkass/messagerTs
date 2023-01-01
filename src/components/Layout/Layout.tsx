@@ -1,9 +1,13 @@
-import React,{FC, useEffect, useReducer, useState} from "react"
+import React,{FC, memo, useCallback, useEffect, useMemo, useReducer, useState} from "react"
 import { Button } from "react-bootstrap"
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useDispatch, useSelector } from "react-redux";
 import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import './Layout.scss'
+import { Link, NavLink, useLocation, useParams } from "react-router-dom";
+import jwtDecode from "jwt-decode";
+import { check, checkAuth } from "./LayoutService";
+import { tokenAction } from "../../store/token";
 
 export interface IUserReducer {
     auth: {
@@ -13,43 +17,59 @@ export interface IUserReducer {
     }
 }
 
-interface ITake{
-    email: string,
-    photoURL:string
+const Layout:FC = memo(()=>{
+    const toks = useSelector((state:any)=>state.token.token)
+    console.log(toks);
+    const [tok, setTok] = useState(toks)
+    const token: any= toks 
+    const location = useLocation()
+    const dispatch =useDispatch()
     
-}
 
-const Layout:FC = ()=>{
-    const [take,setTake] = useState<ITake>()  
-    const auth = useSelector((state: IUserReducer)=>state.auth.auth)
-    const app  = useSelector((state: IUserReducer)=>state.auth.firebase)
-    const b:any = useAuthState(auth?.getAuth(app))
-    console.log(b);
-    
     useEffect(()=>{
-    setTake(auth?.getAuth(app))
-    },[auth]) 
+        check()
+        .finally(()=>{
+            setTok(localStorage.getItem('token'))
+        })
+        dispatch(tokenAction())
+    },[location, tok])
 
-    const login =async ()=>{  
-        const provider = new GoogleAuthProvider()
-        const get = getAuth(app || '') 
-        const {user}:any = await signInWithPopup(get, provider)
-        console.log(user); 
-    }
-     const out =async ()=>{  
-        const get = await getAuth(app || '') 
-        const user:any = await signOut(get)
-        console.log(user);
-    }
-    
+
+
+    if(!tok){
+    return(
+    <div className="Layout">
+        
+        <div className="Layout__fixed">
+        <NavLink  
+            className={({ isActive }) =>
+            isActive ? 'activeLink' : "Link"}
+            to="/login">
+            Вход
+        </NavLink>
+        <NavLink  
+            className={({ isActive }) =>
+            isActive ? 'activeLink' : "Link"}
+            to="/registration">
+            Регистрация
+        </NavLink>
+        </div>
+    </div> 
+    )}
+
     return(
         <div className="Layout">
-            <Button>{b[0]?.email}</Button>
-            <img src={b[0]?.photoURL}/>
-            <Button onClick = {login}>Вход</Button>
-            <Button onClick = {out}>Выход</Button>
+            <div className="Layout__fixed">
+                <NavLink
+                className={({ isActive }) =>
+                isActive ? 'activeLink' : "Link"}
+                to={`/my/${toks?.id}`}>
+                    {toks?.email}
+                </NavLink>
+               <button className="Link" onClick={()=>{localStorage.removeItem('token');setTok(null); check()}}>Выйти</button>
+            </div>
         </div>
     )
-}
+})
 
 export default Layout

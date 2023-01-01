@@ -2,35 +2,29 @@ import React, { FC, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import { Button } from "react-bootstrap";
-import { logIn } from "./LoginService";
+import { logIn, registration } from "./LoginService";
 import Input from "../../components/Input/Input";
 import './Login.scss'
 import { redirect, useNavigate } from "react-router-dom";
 import { tokenAction } from "../../store/token";
 
 export interface ILoginRedux{
-    token: {
-        token: string,
+    auth: {
+        auth: any,
+        firebase: any,
+        firestore: any
     }
 }
 
 
-const Login:FC = () => {
-    const token:any  = useSelector((state:ILoginRedux)=>state.token.token)
-    document.title = "Авторизация"
-
+const Registration:FC = () => {
+    const app  = useSelector((state:ILoginRedux)=>state.auth.firebase)
+    document.title = "Регистрация"
+    const navigate = useNavigate()
     const password = useRef<HTMLInputElement | null>(null)
     const loginInp = useRef<HTMLInputElement | null>(null)
-    const navigate = useNavigate()
     const dispatch = useDispatch()
-    const log = () =>{
-        logIn(loginInp.current?.value || '', password.current?.value || '')
-        .then(()=>{
-            navigate(`/`)
-            dispatch(tokenAction())
-        })
-    }
-
+    
     if(localStorage.getItem('token')){
         return (
             <div className="Login">
@@ -42,19 +36,28 @@ const Login:FC = () => {
         )
     }
 
+    const reg =async ()=>{
+        registration(loginInp.current?.value || '', password.current?.value || '')
+        .then(()=>{
+            navigate('/login')
+            dispatch(tokenAction())
+        })
+        
+    }
+
     return (
         <div className="Login">
             <div>
                 
-                <h2>Вход</h2>
+                <h2>Регистрация</h2>
                 <input type="text" ref={loginInp} placeholder="Логин"/>
                 <input type="password" ref={password} placeholder="Пароль"/>
-                <Button onClick={()=>{log()}}>
-                    Вход
+                <Button onClick={()=>{reg()}}>
+                    Регисрация
                 </Button>
             </div>
         </div>
     )
 }
 
-export default Login
+export default Registration
