@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { FC, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { asyncChatAction } from "../../store/chat";
 import { IReduceState } from "../../types/IReduce";
 import './Visible.scss'
 
@@ -38,6 +39,12 @@ const VisibleWindow:FC<IProps>= ({visible})=>{
             email: user.email
         })   
     }
+
+    const dispatch = useDispatch()
+
+    useMemo(()=>{
+        dispatch(asyncChatAction())
+    },[])
 
     useEffect(()=>{
         fetchUser()

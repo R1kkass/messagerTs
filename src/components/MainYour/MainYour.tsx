@@ -5,7 +5,7 @@ import VisibleWindow from "../VisibleWindow/VisibleWindow";
 
 interface IUser{
     user:{
-        photoURL: string,
+        img: string,
         email:string,
         displayName:string,
     }
@@ -18,7 +18,7 @@ const MainYour:FC<IUser> = memo(({user})=>{
         return(<div className="Main">
             <div className="Main__info">
                 <div>
-                    <img src={user?.photoURL} alt="" />
+                    <img src={user?.img} alt="" />
                     <p>{user?.email}</p>
                     <p>{user?.displayName}</p>
                     <p onClick={()=>setVisible(e=>!e)}>Создать чат</p>

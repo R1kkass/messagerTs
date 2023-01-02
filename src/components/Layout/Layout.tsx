@@ -1,4 +1,4 @@
-import React,{FC, memo, useCallback, useEffect, useMemo, useReducer, useState} from "react"
+import React,{FC, memo, useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useState} from "react"
 import { Button } from "react-bootstrap"
 import {useAuthState} from 'react-firebase-hooks/auth'
 import { useDispatch, useSelector } from "react-redux";
@@ -13,7 +13,7 @@ export interface IUserReducer {
     auth: {
         auth: any,
         firebase: any,
-        firestore: any
+        firestore: any 
     }
 }
 
@@ -24,9 +24,9 @@ const Layout:FC = memo(()=>{
     const token: any= toks 
     const location = useLocation()
     const dispatch =useDispatch()
-    
 
-    useEffect(()=>{
+
+    useLayoutEffect(()=>{
         check()
         .finally(()=>{
             setTok(localStorage.getItem('token'))

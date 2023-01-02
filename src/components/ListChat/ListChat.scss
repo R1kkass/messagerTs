@@ -1,0 +1,20 @@
+@import '../../Styles/Variables.scss';
+
+.ListChat{
+    &__block{
+        height: 60px;
+        display: flex;
+        padding-left: 20px;
+        align-items: center;
+        border: solid 1px $main-color;
+        cursor: pointer;
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        &:hover{
+            background-color: lightgray;
+
+        }
+    }
+}

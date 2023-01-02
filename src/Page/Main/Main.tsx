@@ -12,7 +12,7 @@ import { IReduceState } from "../../types/IReduce";
 import MainYour from "../../components/MainYour/MainYour";
 
 export interface IUser{
-    photoURL: string,
+    img: string,
     email: string,
     displayName: string
 }
@@ -50,7 +50,7 @@ const Main = memo(()=>{
         <div className="Main">
             <div className="Main__info">
                 <div>
-                    <img src={user?.photoURL} alt="" />
+                    <img src={user?.img} alt="" />
                     <p>{user?.email}</p>
                     <p>{user?.displayName}</p>
 
