@@ -16,7 +16,8 @@ export function checkAuth(){
     )
     .then((res:IData)=>{
         return res.data.bol
-    })
+    }) 
+    
     .catch((e)=>{
 
     })
