@@ -10,10 +10,13 @@ const ListChat = memo(()=>{
     const dispatch = useDispatch()
 
     const listChat:any = useSelector((state:IReduceState)=>state.chat.chats)
-    console.log(listChat?.data?.user);
+
+    const fetchs =async ()=>{
+        await dispatch(asyncChatAction())
+    }
 
     useLayoutEffect(()=>{
-        dispatch(asyncChatAction())
+        fetchs()
     },[])
     
     return(
@@ -22,7 +25,7 @@ const ListChat = memo(()=>{
                 <div className="ListChat__block">
                     <Link to = {`/im/${list.idRoom}`}>
                     {list.id}
-                    {list.userCreator}
+                    {list.secondUser}
                     </Link>
                 </div>
             ))}

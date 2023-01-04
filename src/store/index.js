@@ -7,6 +7,7 @@ import { tokenReducer } from "./token";
 import createSagaMiddleware from "@redux-saga/core";
 import { rootWatcher } from "../saga";
 import { chatReducer } from "./chat";
+import { mainReducer } from "./main";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -15,7 +16,8 @@ const rootReducers =combineReducers({
     messages: messageReducer,
     auth: authReducer,
     token: tokenReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    mainInfo: mainReducer
 })
 
 export const store = createStore(rootReducers, applyMiddleware(sagaMiddleware))

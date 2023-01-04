@@ -1,61 +1,55 @@
 import React, { memo, useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IUserReducer } from "../../components/Layout/Layout";
 import * as auth from 'firebase/auth'
 import { IGoogle } from "../../types/IGoogle";
 import './Main.scss'
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { FetchOneUser } from "./MainService";
 import { IReduceState } from "../../types/IReduce";
 import MainYour from "../../components/MainYour/MainYour";
+import { domen, URi } from "../../Const/Const";
+import LeftBlockMain from "../../components/LeftBlockMain/LeftBlockMain";
+import { mainAction } from "../../store/main";
 
 export interface IUser{
     img: string,
     email: string,
     displayName: string
 }
-
-interface ITokenTake{
+export interface ITokenTake{
     email:string
 }
 
 
 const Main = memo(()=>{
-    
+    const location = useLocation()
+    const dispatch = useDispatch()
     const params: any = useParams()
     const token:ITokenTake = useSelector((state:IReduceState)=>state.token.token)
-
+    const userss = useSelector((state:IReduceState)=> state.mainInfo.mainInfo)
     const  func =async ()=>{
         const res:any = await FetchOneUser(params.id)
-        setUser(res) 
+        dispatch(mainAction(res))
     }
 
     useEffect(()=>{
         func()
-    },[])
+    },[location])
 
-    const [user, setUser] = useState<IUser>()
-    console.log(user);
     
-    if(token?.email==user?.email){
+    if(token?.email==userss?.email){
         return(
-            <MainYour user={user}/>
+            <MainYour user={userss}/>
         )
     }
 
     if(localStorage.getItem('token')){
     return(
         <div className="Main">
-            <div className="Main__info">
-                <div>
-                    <img src={user?.img} alt="" />
-                    <p>{user?.email}</p>
-                    <p>{user?.displayName}</p>
-
-                </div>
-            </div>
+            <LeftBlockMain user={userss}/>
             <div className="Main__block">
                 <Link to="/">123</Link>
             </div>

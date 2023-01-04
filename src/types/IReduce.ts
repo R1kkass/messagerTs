@@ -4,18 +4,24 @@ export interface IReduceState{
     token:{
         token:{
             email:string,
-            role:string
+            role:string,
+            img: string,
+            displayName:string
         },  
     },
     chat:{
         chats: IChats
+    },
+    mainInfo:{
+        mainInfo: IMainInfo
     }
     
 }
 
 export interface IToken{
     email: string,
-    role: string
+    role: string,
+    img:string
 }
 
 export interface IUnitChat{
@@ -30,4 +36,8 @@ export interface IChats{
     data: IUnitChat
 }
 
-
+interface IMainInfo{
+    email:string,
+    img:string,
+    date: string
+}

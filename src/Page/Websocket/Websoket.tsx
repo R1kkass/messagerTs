@@ -12,6 +12,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { IUserReducer } from "../../components/Layout/Layout";
 import jwtDecode from "jwt-decode";
 import { IReduceState, IToken } from "../../types/IReduce";
+import LeftBlockMain from "../../components/LeftBlockMain/LeftBlockMain";
+import MainYourComponent from "../../components/MainYour/MainYourComponent";
 
 let limit = 0
 
@@ -43,7 +45,6 @@ const Websoket =()=> {
 
     function connect(){
       socket.current = new WebSocket("ws://localhost:5001/con")
-      console.log(userToken); 
       
       socket.current.onopen = ()=>{
         
@@ -54,7 +55,6 @@ const Websoket =()=> {
             id: params.id,
             limit: limit
           }
-          console.log(userToken);
           socket.current?.send(JSON.stringify(message))
           setConnected(true);
           setInterval(()=>{
@@ -63,8 +63,9 @@ const Websoket =()=> {
       }
       
 
-      socket.current.onmessage = (e)=>{
+      socket.current.onmessage = (e)=>{        
         const messagex = JSON.parse(e.data)
+        
         dispatch({type: 'SEND', action: messagex.rows})
         dispatch({type: 'COUNT', action: messagex.count})
         setVisible(false)
@@ -138,8 +139,11 @@ const Websoket =()=> {
 
 
   return (
+    <div className="Websocket__grid">
+      <MainYourComponent/>
     <div className="Websocket">
       <Loader visible={visible}/>
+      
       <div>
       <br/>
         <div className="Websocket__textarea">
@@ -156,6 +160,7 @@ const Websoket =()=> {
           <h2>Загрузка...</h2>
         </div>
       </div>
+    </div>
     </div>
   )
 }

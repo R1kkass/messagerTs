@@ -3,7 +3,6 @@ import {put,call,takeEvery} from "redux-saga/effects"
 import jwtDecode from "jwt-decode";
 
 function* tokenWorker(){
-    const a = yield call(check)
     yield put({type: 'EDIT_TOKEN', token: jwtDecode(localStorage.getItem('token')) })
 }
 

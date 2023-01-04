@@ -1,0 +1,15 @@
+@import '../../Styles/Variables.scss';
+
+.ModalForEdit{
+    align-items:center;
+    justify-content: center;
+    height: 100%;
+    flex-direction: column;
+
+    display: flex;
+    button{
+        margin-top: 40px;
+        background: white;
+        color: $main-color;
+    }
+}

@@ -8,6 +8,7 @@ import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import { check, checkAuth } from "./LayoutService";
 import { tokenAction } from "../../store/token";
+import { tokens } from "../../Const/Const";
 
 export interface IUserReducer {
     auth: {
@@ -17,26 +18,37 @@ export interface IUserReducer {
     }
 }
 
-const Layout:FC = memo(()=>{
-    const toks = useSelector((state:any)=>state.token.token)
-    console.log(toks);
-    const [tok, setTok] = useState(toks)
-    const token: any= toks 
+const Layout:FC = ()=>{
+    
     const location = useLocation()
     const dispatch =useDispatch()
+    const [bol, setBol] = useState(false) 
 
+    const [locs, setLocs] = useState(localStorage.getItem('token') || '')
+
+    const checkHoc = ()=>{
+        check()
+        .then((e:any)=>{
+            setBol(e)
+        })
+        .catch((e)=>{
+            setBol(false)
+            console.log(bol);  
+        })
+        .finally(()=>{
+            dispatch(tokenAction())
+            console.log(toks);
+        })
+    }
+    
+    const toks = useSelector((state:any)=>state.token.token)
 
     useLayoutEffect(()=>{
-        check()
-        .finally(()=>{
-            setTok(localStorage.getItem('token'))
-        })
-        dispatch(tokenAction())
-    },[location, tok])
+        checkHoc()
+    },[location])
+        
 
-
-
-    if(!tok){
+    if(!bol){
     return(
     <div className="Layout">
         
@@ -66,10 +78,10 @@ const Layout:FC = memo(()=>{
                 to={`/my/${toks?.id}`}>
                     {toks?.email}
                 </NavLink>
-               <button className="Link" onClick={()=>{localStorage.removeItem('token');setTok(null); check()}}>Выйти</button>
+               <button className="Link" onClick={()=>{localStorage.removeItem('token'); checkHoc()}}>Выйти</button>
             </div>
         </div>
     )
-})
+}
 
 export default Layout
