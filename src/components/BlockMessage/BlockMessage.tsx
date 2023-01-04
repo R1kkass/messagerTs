@@ -35,7 +35,7 @@ const BlockMessage = ({mesg, deleteMessage}:IMess)=>{
           </div>
           :
           <div className={mess.user == b[0]?.email ? "Websocket__messageYou" : "Websocket__message"}>
-            <p>Отправитель: {mess.user}</p>
+            <p>Отправитель: {mess.id}</p>
             <p>{mess.text}</p>
             {mess.user == b[0]?.email ? <button onClick={()=>deleteMessage(mess.id)}>Удалить</button> : ''}
           </div>

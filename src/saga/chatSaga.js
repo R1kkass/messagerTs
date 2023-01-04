@@ -5,6 +5,7 @@ import { ASYNC_ADD_CHAT, chatAction } from "../store/chat";
 
 function* chatWorker(){
     const res = yield call(fetchChat)
+    yield console.log(res);
     yield put(chatAction(res))
 }
 

@@ -1,3 +1,4 @@
+import jwtDecode from "jwt-decode"
 
 const intialState = {
     token: localStorage.getItem('token')
@@ -12,4 +13,4 @@ export const tokenReducer = (state = intialState, action)=>{
     }
 }
 
-export const tokenAction = ()=>({type:"ASYNC_EDIT", token: localStorage.getItem('token')})
+export const tokenAction = ()=>({type:"EDIT_TOKEN", token: jwtDecode(localStorage.getItem('token'))})

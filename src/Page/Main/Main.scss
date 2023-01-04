@@ -15,7 +15,10 @@
         display: grid;
         justify-content: center;
         
-        
+        div{
+            display: flex;
+            flex-direction: column;
+        }
         img{
             display: flex;
             justify-content: center;

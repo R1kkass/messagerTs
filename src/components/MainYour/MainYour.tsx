@@ -1,7 +1,15 @@
 import React, { FC, memo, useState } from "react";
+import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { domen } from "../../Const/Const";
+import { ITokenTake } from "../../Page/Main/Main";
+import { IReduceState } from "../../types/IReduce";
 import ListChat from "../ListChat/ListChat";
+import ModalForEdit from "../ModalForEdit/ModalForEdit";
+import ModalWindow from "../ModalWindow/ModalWindow";
 import VisibleWindow from "../VisibleWindow/VisibleWindow";
+import MainYourComponent from "./MainYourComponent";
 
 interface IUser{
     user:{
@@ -11,25 +19,21 @@ interface IUser{
     }
 }
 
-const MainYour:FC<IUser> = memo(({user})=>{
+const MainYour:FC<any> = memo(()=>{
 
     const [visible, setVisible] = useState<boolean>(false)
+    
+    const user = useSelector((state:IReduceState)=>state.mainInfo.mainInfo)
+    console.log(user?.img);
 
-        return(<div className="Main">
-            <div className="Main__info">
-                <div>
-                    <img src={user?.img} alt="" />
-                    <p>{user?.email}</p>
-                    <p>{user?.displayName}</p>
-                    <p onClick={()=>setVisible(e=>!e)}>Создать чат</p>
-                    <VisibleWindow visible={visible}/>
-                </div>
-            </div>
+    return(
+        <div className="Main">
+            <MainYourComponent />
             <div className="Main__block">
                 <ListChat/>
             </div>
         </div>
-        )
+    )
 })
 
 export default MainYour

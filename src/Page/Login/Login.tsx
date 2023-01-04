@@ -23,6 +23,7 @@ const Login:FC = () => {
     const loginInp = useRef<HTMLInputElement | null>(null)
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    
     const log = async () =>{
         await logIn(loginInp.current?.value || '', password.current?.value || '')
         await dispatch(tokenAction())

@@ -1,0 +1,69 @@
+@import '../../Styles/Variables.scss';
+
+@keyframes slideIn {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+
+.ModaWindow__button{
+    margin: 0 auto;
+}
+
+%ModalWindow{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    min-width: 100%;
+    min-height: 100vh;
+    background-color: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ModalWindow__children{
+        width: 50%;
+        height: 600px;
+        min-width: 300px;
+        overflow: hidden;
+        background-color: $main-color;
+        border-radius: 20px;
+        z-index: 999;
+        opacity: 1;
+    }
+    .ModalWindow__window{
+        z-index: 99999999999999999;
+        width: 100%;
+        height: 100vh;
+        position: fixed;
+        background: rgba(136, 136, 136, 0.2);
+    }
+}
+
+.ModalWindow{
+    @extend %ModalWindow;
+}
+
+
+.my-node-enter {
+    
+    @extend %ModalWindow;
+    opacity: 0;
+  }
+  .my-node-enter-active {
+
+    opacity: 1;
+    transition: opacity 500ms;
+  }
+  .my-node-exit {
+    
+    opacity: 1;
+  }
+  .my-node-exit-active {
+    opacity: 0;
+    transition: opacity 500ms;
+  }
