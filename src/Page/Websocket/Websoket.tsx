@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { memo, useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import "./Websocket.scss"
@@ -17,7 +17,7 @@ import MainYourComponent from "../../components/MainYour/MainYourComponent";
 
 let limit = 0
 
-const Websoket =()=> {
+const Websoket =memo(()=> {
     const dispatch = useDispatch()
     const socket = useRef<WebSocket | null>(null)
     const [connected, setConnected] = useState(false)
@@ -108,8 +108,9 @@ const Websoket =()=> {
       const message = {
         event: 'delete',
         limit: limit,
-        idDelete: id,
         id: params.id,
+        idDelete: id,
+        idRoom: params.id,
         username: userToken.email,
       }
       socket.current?.send(JSON.stringify(message))
@@ -141,9 +142,10 @@ const Websoket =()=> {
 
   return (
     <div className="Websocket__grid">
+      <Loader visible={visible}/>
       <MainYourComponent/>
     <div className="Websocket">
-      <Loader visible={visible}/>
+      
       
       <div>
       <br/>
@@ -164,6 +166,6 @@ const Websoket =()=> {
     </div>
     </div>
   )
-}
+})
 
 export default Websoket

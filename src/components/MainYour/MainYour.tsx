@@ -19,7 +19,7 @@ interface IUser{
     }
 }
 
-const MainYour:FC<any> = ()=>{
+const MainYour:FC<any> = memo(()=>{
 
     const [visible, setVisible] = useState<boolean>(false)
     
@@ -34,6 +34,6 @@ const MainYour:FC<any> = ()=>{
             </div>
         </div>
     )
-}
+})
 
 export default MainYour

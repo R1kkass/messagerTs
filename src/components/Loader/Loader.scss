@@ -1,14 +1,18 @@
+@import '../../Styles/Variables.scss';
+
 .lds-ring {
     display: inline-block;
     position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
     min-height: 100%;
     top: 0;
     background-color: lightgray;
     min-width: 100%;
     height: 80px;
     opacity: 0.5;
-    
-    z-index: 999;
+    z-index: 1000;
   }
   .lds-ring .lds-rings {
     margin-top: auto;
@@ -22,7 +26,7 @@
     border-radius: 50%;
     margin-top: 100vh;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: rgb(88, 255, 11) transparent transparent transparent;
+    border-color: $main-color transparent transparent transparent;
   }
   .lds-ring .lds-rings:nth-child(1) {
     animation-delay: -0.45s;

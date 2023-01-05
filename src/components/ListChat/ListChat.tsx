@@ -1,3 +1,4 @@
+import { domen } from "Const/Const";
 import React, { memo, useEffect, useLayoutEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -36,14 +37,8 @@ const ListChat = memo(()=>{
             },15000)
         }
         
-    
         socket.current.onmessage = (e)=>{    
-
-            console.log(e.data);
-            
-        const messagex = JSON.parse(e.data)
           fetchs()
-          
         }
         socket.current.onerror = ()=>{
           console.log('ошибка');
@@ -66,9 +61,18 @@ const ListChat = memo(()=>{
             {listChat?.data?.user?.map((list:any)=>(
                 <div className="ListChat__block">
                     <Link to = {`/im/${list.idRoom}`}>
-                    {list.id}
-                    {list.secondUser}
-                    {list.lastMessage}
+                    <img className="Websocket__img" 
+                        src={`http://${domen}/${list?.secondUser}.jpg`}
+                        alt={list?.user}/>
+                    <div>
+                        <div>{list.secondUser}</div>
+                        <div className="ListChat__img" >
+                            <img
+                            className="Img__lastUser" 
+                            src={`http://${domen}/${list?.lastUser}.jpg`} />
+                            <div>{list.lastMessage}</div>
+                        </div>
+                    </div>
                     </Link>
                 </div>
             ))}
