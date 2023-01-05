@@ -25,13 +25,11 @@ const ListChat = memo(()=>{
         socket.current = new WebSocket("ws://localhost:5001/con")
         
         socket.current.onopen = ()=>{
-          console.log('messagex');
           const message = {
               event: "connectionChat",
               username: user?.email
             }
             socket.current?.send(JSON.stringify(message))
-            console.log('messagex');
             setInterval(()=>{
     
             },15000)
@@ -51,28 +49,48 @@ const ListChat = memo(()=>{
     
     useEffect(()=>{
       connect()
-
-      console.log('e');
-
     },[])
 
     return(
         <div className="ListChat">
             {listChat?.data?.user?.map((list:any)=>(
-                <div className="ListChat__block">
+                <div key={list.id} className="ListChat__block">
                     <Link to = {`/im/${list.idRoom}`}>
-                    <img className="Websocket__img" 
-                        src={`http://${domen}/${list?.secondUser}.jpg`}
-                        alt={list?.user}/>
+                    {list.secondUser!==user.email ? 
+                    <>
+                        <img className="Img__Creator" 
+                            src={`http://${domen}/${list?.secondUser}.jpg`}
+                            alt={list?.user}/>
+                            <div>
+                            <div className="ListChat__secondUser">{list.secondUser}</div>
+                            <div className="ListChat__img" >
+                                <img
+                                className="Img__lastUser" 
+                                src={`http://${domen}/${list?.lastUser}.jpg`}
+                                alt="" />
+                                <div>{list.lastMessage}</div>
+                            </div>
+                        </div>
+                    </>
+                    :
+                    <>
+                    <img className="Img__Creator" 
+                    src={`http://${domen}/${list?.userCreator}.jpg`}
+                    alt={list?.user}/>
                     <div>
-                        <div>{list.secondUser}</div>
+                        <div className="ListChat__secondUser">{list.userCreator}</div>
                         <div className="ListChat__img" >
                             <img
                             className="Img__lastUser" 
-                            src={`http://${domen}/${list?.lastUser}.jpg`} />
+                            src={`http://${domen}/${list?.lastUser}.jpg`} 
+                            alt=""
+                            />
                             <div>{list.lastMessage}</div>
                         </div>
                     </div>
+                </>
+                    }
+                    
                     </Link>
                 </div>
             ))}

@@ -32,12 +32,10 @@ const Layout:FC = ()=>{
             setBol(e)
         })
         .catch((e)=>{
-            setBol(false)
-            console.log(bol);  
+            setBol(false) 
         })
         .finally(()=>{
             dispatch(tokenAction())
-            console.log(toks);
         })
     }
     

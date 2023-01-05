@@ -65,7 +65,6 @@ const Websoket =memo(()=> {
 
       socket.current.onmessage = (e)=>{        
         const messagex = JSON.parse(e.data)
-        console.log(messagex);
         
         dispatch({type: 'SEND', action: messagex.rows})
         dispatch({type: 'COUNT', action: messagex.count})

@@ -11,13 +11,16 @@
 
 .VisibleMenu{
     height: 200px;
+    cursor: pointer;
     overflow-y: auto;
     background-color: white;
     animation: identifier duration 0.3s 0.3s 1;
     &__unit{
         cursor: pointer;
+        color: $main-color;
         &:hover{
             background-color: $main-color;
+            color: white;
         }
     }
 }

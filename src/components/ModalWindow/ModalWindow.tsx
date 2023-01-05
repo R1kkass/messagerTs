@@ -8,16 +8,15 @@ interface IModalWindow{
 }
 
 const ModalWindow:FC<IModalWindow> = ({children})=>{
-    let [styles,setStyles] = useState('ModalWindow__notVisible')
+
     const [visible,setVisible] = useState(false)
 
-    const [inProp, setInProp] = useState(false);
     const nodeRef = useRef<any>()
 
     
     return(
-        <>
-      <Button className="ModalWindow__button" onClick={()=>setVisible(true)}>Открыть окно</Button>
+    <>
+      <Button className="ModalWindow__button" onClick={()=>setVisible(true)}>Изменить аватар</Button>
             <CSSTransition nodeRef={nodeRef} in={visible} timeout={500} classNames="my-node" unmountOnExit
         onEnter={() => setVisible(true)}
         onExited={() => setVisible(false)}>            

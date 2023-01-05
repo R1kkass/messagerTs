@@ -5,6 +5,8 @@
     &__img{
         width: 50px;
         border-radius: 50%;
+        height: 50px;
+        object-fit: cover;
     }
     &__message{ 
         width: 30%;

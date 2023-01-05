@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { FC, useEffect, useMemo, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncChatAction } from "../../store/chat";
 import { IReduceState } from "../../types/IReduce";
@@ -30,7 +31,6 @@ const VisibleWindow:FC<IProps>= ({visible})=>{
     async function fetchUser(){
         const response:res = await axios.get('http://localhost:5001/api/user/getall')
         setList(response.data.user)
-        console.log(response.data.user);
     }
 
     async function createChat(secondEmail: string) {

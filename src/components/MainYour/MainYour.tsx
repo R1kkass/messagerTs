@@ -20,11 +20,7 @@ interface IUser{
 }
 
 const MainYour:FC<any> = memo(()=>{
-
-    const [visible, setVisible] = useState<boolean>(false)
-    
     const user = useSelector((state:IReduceState)=>state.mainInfo.mainInfo)
-    console.log(user?.img);
 
     return(
         <div className="Main">

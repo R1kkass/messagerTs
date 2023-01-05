@@ -31,8 +31,12 @@
             position: fixed;
             width: 265px;
             margin: 0 auto;
+            
             display: flex;
             align-items: center;
+            img{
+                object-fit: cover;
+            }
         }
         width: 265px;
     }

@@ -29,7 +29,6 @@ export function checkAuth(){
 
 export async function check(){
     let a = await checkAuth()
-    console.log(a);
     if(!a){
         localStorage.removeItem('token')
     }
