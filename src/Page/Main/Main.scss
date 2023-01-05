@@ -2,18 +2,14 @@
 
 .Main{
     display: grid;
-    grid-template-columns: .4fr 1fr;
+    grid-template-columns: 265px 1fr;
     min-height: calc(100vh - 60px);
     &__info{
-        background-color: #0d6efd;
-        color: white;
-        padding-top: 20px;
+        
         p{
             font-size: 20px;
             text-align: center;
         }
-        display: grid;
-        justify-content: center;
         
         div{
             display: flex;
@@ -27,8 +23,23 @@
             border-radius: 50%;
             width: 200px;
         }
+        .Info__fixed{
+            background-color: #0d6efd;
+            color: white;
+            padding-top: 20px;
+            height: calc(100vh - 60px);
+            position: fixed;
+            width: 265px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+        width: 265px;
     }
+    
 }
+
+
 
 .UnAuthorization{
     display: flex;

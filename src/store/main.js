@@ -1,6 +1,5 @@
 const inialSTate = {
     mainInfo:{},
-    date: Date.now()
 }
 
 const ADD = 'ADD'
@@ -15,5 +14,5 @@ export const mainReducer = (state=inialSTate, action)=>{
     }
 }
 
-export const mainAction = (payload)=>({type:ADD, mainInfo: payload, date: Date.now()})
+export const mainAction = (payload)=>({type:ADD, mainInfo: payload})
 export const mainAsyncAction = (payload) => ({type: ASYNC_ADD})

@@ -1,11 +1,11 @@
 @import '../../Styles/Variables.scss';
 
 .Websocket{
-    z-index: 0;
-    overflow-y: auto;
-    height: calc(100vh - 100px);
-    display: grid;
-    grid-template-columns: 0.4fr 1fr;
+    margin: 0;
+    &__img{
+        width: 50px;
+        border-radius: 50%;
+    }
     &__message{ 
         width: 30%;
         border: solid 1px $main-color;
@@ -67,7 +67,7 @@
             box-sizing: border-box;
             
             textarea{
-                width: 50%;
+                width: calc(100% - 400px);
                 border-radius: 5px;
                 height: 50px;
                 outline: 1px $main-color solid;
@@ -109,5 +109,5 @@
 
 .Websocket__grid{
     display: grid;
-    grid-template-columns: .4fr 1fr;
+    grid-template-columns: 265px 1fr;
 }
