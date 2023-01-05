@@ -1,14 +1,17 @@
+import { domen } from "Const/Const";
 import { reverse } from "dns/promises";
-import React from "react";
+import React, { memo, useEffect, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useSelector } from "react-redux";
+import { IReduceState } from "types/IReduce";
 import { IUserReducer } from "../Layout/Layout";
 
 interface IObj{
     user: string,
     id: number,
     event: string,
-    text: string
+    text: string,
+    img: string
 }
 
 interface IMess{
@@ -17,12 +20,11 @@ interface IMess{
 }
 
 
-
-const BlockMessage = ({mesg, deleteMessage}:IMess)=>{
+const BlockMessage = memo(({mesg, deleteMessage}:IMess)=>{
+  const socket = useRef<WebSocket | null>(null)
   const auth = useSelector((state: IUserReducer)=>state.auth.auth)
     const app  = useSelector((state: IUserReducer)=>state.auth.firebase)
-  const b:any = useAuthState(auth?.getAuth(app))
-
+  const user = useSelector((state: IReduceState)=> state.token.token)
 
   return(
         <>
@@ -34,16 +36,17 @@ const BlockMessage = ({mesg, deleteMessage}:IMess)=>{
           {mess.user} подключился к чату
           </div>
           :
-          <div className={mess.user == b[0]?.email ? "Websocket__messageYou" : "Websocket__message"}>
-            <p>Отправитель: {mess.id}</p>
+          <div className={mess.user == user?.email ? "Websocket__messageYou" : "Websocket__message"}>
+            <p>Отправитель: {mess.user}</p>
             <p>{mess.text}</p>
-            {mess.user == b[0]?.email ? <button onClick={()=>deleteMessage(mess.id)}>Удалить</button> : ''}
+            {mess.user == user?.email ? <button onClick={()=>deleteMessage(mess.id)}>Удалить</button> : ''}
+            <img className="Websocket__img" src={`http://${domen}/${mess?.user}.jpg`} alt={mess?.user} />
           </div>
           }
         </div>
       )}
         </>
     )
-}
+})
 
 export default BlockMessage

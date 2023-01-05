@@ -18,6 +18,7 @@ interface IUser{
 }
 
 export async function FetchOneUser(id:string){
+    console.log(id);
     
     const response:IUser = await axios.post(`http://localhost:5001/api/user/getone`,{
         id: id,

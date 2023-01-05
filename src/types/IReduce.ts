@@ -6,7 +6,8 @@ export interface IReduceState{
             email:string,
             role:string,
             img: string,
-            displayName:string
+            displayName:string,
+            id: string
         },  
     },
     chat:{

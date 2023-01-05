@@ -65,6 +65,7 @@ const Websoket =()=> {
 
       socket.current.onmessage = (e)=>{        
         const messagex = JSON.parse(e.data)
+        console.log(messagex);
         
         dispatch({type: 'SEND', action: messagex.rows})
         dispatch({type: 'COUNT', action: messagex.count})
@@ -109,7 +110,7 @@ const Websoket =()=> {
         limit: limit,
         idDelete: id,
         id: params.id,
-        user: userToken.email,
+        username: userToken.email,
       }
       socket.current?.send(JSON.stringify(message))
     }

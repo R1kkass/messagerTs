@@ -55,9 +55,13 @@ const VisibleWindow:FC<IProps>= ({visible})=>{
         return(
         <div className="VisibleMenu">
             {list.map((list:IList)=>(
+                <>
+                {(list.email !== user.email) ? 
                 <div onClick={()=>createChat(list.email)} className="VisibleMenu__unit">
-                    {list.email}
-                </div>
+                {list.email}
+            </div> : ''}
+            </>
+                
             ))}
         </div>
         )
