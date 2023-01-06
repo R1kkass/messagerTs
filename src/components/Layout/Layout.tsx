@@ -9,6 +9,7 @@ import jwtDecode from "jwt-decode";
 import { check, checkAuth } from "./LayoutService";
 import { tokenAction } from "../../store/token";
 import { tokens } from "../../Const/Const";
+import { IReduceState } from "types/IReduce";
 
 export interface IUserReducer {
     auth: {
@@ -41,7 +42,7 @@ const Layout:FC = ()=>{
         })
     }
     
-    const toks = useSelector((state:any)=>state.token.token)
+    const toks = useSelector((state:IReduceState)=>state.token.token)
 
     useLayoutEffect(()=>{
         checkHoc()

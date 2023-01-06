@@ -20,17 +20,22 @@ interface IListUser{
     email: string
 }
 
-const WebSocketUserTop:FC<any> = ()=>{
+interface IList{
+    secondUser: string,
+    userCreator: string,
+
+}
+
+const WebSocketUserTop:FC = ()=>{
     const listChat:any = useSelector((state:IReduceState)=>state.chat.chats)
     const user:IListUser = useSelector((state:IReduceState)=>state.token.token)
     
     const params = useParams()
-    const list:any = useMemo(()=>{
+    const list:IList[] = useMemo(()=>{
         return listChat?.data?.user?.filter((i:any)=>{
             return params?.id == i?.idRoom
         })
     },[listChat])
-    console.log(list);
 
     return(
 

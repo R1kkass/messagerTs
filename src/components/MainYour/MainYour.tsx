@@ -19,7 +19,7 @@ interface IUser{
     }
 }
 
-const MainYour:FC<any> = memo(()=>{
+const MainYour:FC = memo(()=>{
 
     const [visible, setVisible] = useState<boolean>(false)
     
