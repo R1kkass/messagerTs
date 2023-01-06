@@ -14,6 +14,7 @@ import jwtDecode from "jwt-decode";
 import { IReduceState, IToken } from "../../types/IReduce";
 import LeftBlockMain from "../../components/LeftBlockMain/LeftBlockMain";
 import MainYourComponent from "../../components/MainYour/MainYourComponent";
+import WebSocketUserTop from "components/WebSocket/WebSocketUserTop";
 
 let limit = 0
 
@@ -84,6 +85,9 @@ const Websoket =memo(()=> {
     const mesg:any = useSelector<IStateRedux>((state) => state.messages.messages)
     const count = useSelector<IStateRedux, string>((state) => state.messages.count)
     const options:object = { weekday: 'short', year: 'numeric', month: 'long', day: 'numeric' };
+    
+    const listChat:any = useSelector((state:IReduceState)=>state.chat.chats)
+
     function sendMessage(){
       setVisible(true)
       const message = {
@@ -138,7 +142,8 @@ const Websoket =memo(()=> {
       </div>
       )
     }
-
+    console.log(listChat);
+    
 
   return (
     <div className="Websocket__grid">
@@ -149,6 +154,7 @@ const Websoket =memo(()=> {
       
       <div>
       <br/>
+        <WebSocketUserTop />
         <div className="Websocket__textarea">
             <div>
             <textarea ref={textRef} placeholder="Введите сообщение"/>

@@ -6,6 +6,16 @@
         width: 50px;
         border-radius: 50%;
     }
+    &__secondUser{
+        min-width: 100%;
+        top:60px;
+        position: fixed;
+        
+        justify-content: center;
+        align-items: end;
+        z-index: 999;
+        box-sizing: border-box;
+    }
     &__message{ 
         width: 30%;
         border: solid 1px $main-color;
@@ -102,6 +112,37 @@
                     outline: 1px solid $main-color;;
                     box-shadow:  0 0 0 2px $main-color;;
                 }
+            }
+        }
+    }
+    &__chatTop{
+        
+        position: fixed;
+        width: calc( 100% - 265px);
+        height: 60px;
+        top:60px;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: 1s linear 1s slidein;
+        margin: 0 auto;
+        
+        div{
+            background:rgba($color: $main-color, $alpha: 0.7);
+            width: 110%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0px;
+            color: white;
+            img{
+                margin-right: 20px;
+                width: 60px;
+                height: 60px;
+                object-fit: cover;
+                border-radius: 50%;
             }
         }
     }

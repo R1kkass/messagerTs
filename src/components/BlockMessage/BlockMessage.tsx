@@ -15,9 +15,10 @@ interface IObj{
 }
 
 interface IMess{
-    mesg: any[];
+    mesg: IObj[];
     deleteMessage: (a: number)=>void
 }
+
 
 
 const BlockMessage = memo(({mesg, deleteMessage}:IMess)=>{

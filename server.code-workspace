@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "server",
+			"path": "../../Messager/server"
+		},
+		{
+			"name": "MessagerTS",
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "MessagerTS"
+	}
+}
