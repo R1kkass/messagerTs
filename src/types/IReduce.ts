@@ -26,11 +26,14 @@ export interface IToken{
 }
 
 export interface IUnitChat{
-    user:{
-    id:string,
-    userCreator: string,
-    secondUser: string
-    }
+    user:[{
+        secondUser: string,
+        userCreator: string,
+        user:string,
+        lastUser: string,
+        idRoom:string,
+        lastMessage:string
+    }]
 }
 
 export interface IChats{

@@ -1,31 +1,58 @@
 @import '../../Styles/Variables.scss';
 
 .Login{
-    width: 40%;
-    display: grid;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
     margin: auto;
     height: calc(100vh - 100px);
     align-items: center;
     justify-content: center;
     min-width: 500px;
     div{
-        padding: 200px;
+        padding-top: 200px;
+        padding-bottom: 200px;
         border-radius: 10px;
+        width: 800px;
         background-color: $main-color;
-    }
-    button{
-        background-color: white;
-        color: $main-color;
+        box-shadow: 0 0 5px 1px;
         display: flex;
         justify-content: center;
+        flex-direction: column;
         align-items: center;
-        margin: 0 auto;
-        height: 40px;
-        min-width: 40%;
-        font-size: 24px;
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80%;
+        }
+        button{
+            background-color: white;
+            color: $main-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            height: 40px;
+            min-width: 40%;
+            font-size: 24px;
+        }
+        h2{
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        input{
+            box-shadow: 0 0 5px px;
+            outline: none;
+            border: none;
+            height: 40px;
+            padding: 10px;
+            width: 70%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-bottom: solid 2px $main-color;
+        }
     }
-    h2{
-        color: white;
-        text-align: center;
-    }
+   
 }

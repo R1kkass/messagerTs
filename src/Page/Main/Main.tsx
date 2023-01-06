@@ -49,7 +49,7 @@ const Main = memo(()=>{
     if(localStorage.getItem('token')){
     return(
         <div className="Main">
-            <LeftBlockMain user={userss}/>
+            <LeftBlockMain />
             <div className="Main__block">
                 <Link to="/">123</Link>
             </div>

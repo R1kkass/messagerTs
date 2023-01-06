@@ -3,18 +3,36 @@ import React, { memo, useEffect, useLayoutEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { asyncChatAction, ASYNC_ADD_CHAT } from "../../store/chat";
-import { IChats, IReduceState, IUnitChat } from "../../types/IReduce";
+import { IReduceState, IUnitChat } from "../../types/IReduce";
 import './ListChat.scss'
+
+interface IListChat{
+    data:{
+        user: IList[]
+    }
+}
+
+interface IList{
+    secondUser: string,
+    userCreator: string,
+    user:string,
+    lastUser: string,
+    idRoom:string,
+    lastMessage:string
+}
 
 const ListChat = memo(()=>{
     
     const dispatch = useDispatch()
     const socket = useRef<WebSocket | null>(null)
-    const listChat:any = useSelector((state:IReduceState)=>state.chat.chats)
+    const listChat:IListChat = useSelector((state:IReduceState)=>state.chat.chats)
     const user = useSelector((state:IReduceState)=>state.token.token)
+
 
     const fetchs =async ()=>{
         await dispatch(asyncChatAction())
+        console.log('v');
+        
     }
 
     useLayoutEffect(()=>{
@@ -54,7 +72,7 @@ const ListChat = memo(()=>{
     return(
         <div className="ListChat">
             {listChat?.data?.user?.map((list:any)=>(
-                <div key={list.id} className="ListChat__block">
+                <div className="ListChat__block">
                     <Link to = {`/im/${list.idRoom}`}>
                     {list.secondUser!==user.email ? 
                     <>

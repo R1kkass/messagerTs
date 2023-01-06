@@ -1,28 +1,27 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
+import React, { FC, memo, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { mainAsyncAction } from "store/main";
 import { domen } from "../../Const/Const";
 import { IReduceState } from "../../types/IReduce";
 
-interface IUser{
-    img: string,
-    email: string,
-    displayName:string
-    
-}
+const LeftBlockMain:FC = memo(()=>{
+    const users = useSelector((state:IReduceState) => state.mainInfo.mainInfo)
+    const dispatch = useDispatch() 
 
-const LeftBlockMain:FC<any> = ({user})=>{
-    const users = useSelector((state:IReduceState) => state.token.token)
-
+    useEffect(()=>{
+        dispatch(mainAsyncAction())
+    },[])
     return (
+        
         <div className="Main__info">
-                <div>
-                    <img src={`http://${domen}/${users?.img}`} alt="" />
-                    <p>{users?.email}</p>
-                    <p>{users?.displayName}</p>
-
+              <div className="Info__fixed">
+                    <div>
+                        <img src={`http://${domen}/${users?.img}`} alt="" />
+                        <p>{users?.email}</p>
+                    </div>
                 </div>
             </div>
     )
-}
+})
 
 export default LeftBlockMain
