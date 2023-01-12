@@ -4,10 +4,11 @@ import { CSSTransition } from "react-transition-group";
 import "./ModalWindow.scss"
 
 interface IModalWindow{
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    nameButton: string
 }
 
-const ModalWindow:FC<IModalWindow> = ({children})=>{
+const ModalWindow:FC<IModalWindow> = ({children ,nameButton})=>{
 
     const [visible,setVisible] = useState(false)
 
@@ -16,7 +17,7 @@ const ModalWindow:FC<IModalWindow> = ({children})=>{
     
     return(
     <>
-      <Button className="ModalWindow__button" onClick={()=>setVisible(true)}>Изменить аватар</Button>
+      <Button className="ModalWindow__button" onClick={()=>setVisible(true)}>{nameButton}</Button>
             <CSSTransition nodeRef={nodeRef} in={visible} timeout={500} classNames="my-node" unmountOnExit
         onEnter={() => setVisible(true)}
         onExited={() => setVisible(false)}>            

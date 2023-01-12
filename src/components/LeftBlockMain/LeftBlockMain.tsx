@@ -1,6 +1,6 @@
 import React, { FC, memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainAsyncAction } from "store/main";
+import { mainAsyncAction } from "../../store/main";
 import { domen } from "../../Const/Const";
 import { IReduceState } from "../../types/IReduce";
 
@@ -11,6 +11,7 @@ const LeftBlockMain:FC = memo(()=>{
     useEffect(()=>{
         dispatch(mainAsyncAction())
     },[])
+    
     return (
         
         <div className="Main__info">

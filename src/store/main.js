@@ -15,4 +15,4 @@ export const mainReducer = (state=inialSTate, action)=>{
 }
 
 export const mainAction = (payload)=>({type:ADD, mainInfo: payload})
-export const mainAsyncAction = (payload) => ({type: ASYNC_ADD})
+export const mainAsyncAction = () => ({type: ASYNC_ADD})

@@ -1,8 +1,5 @@
-import React,{FC, memo, useCallback, useEffect, useLayoutEffect, useMemo, useReducer, useState} from "react"
-import { Button } from "react-bootstrap"
-import {useAuthState} from 'react-firebase-hooks/auth'
+import React,{FC, memo, useEffect, useLayoutEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import './Layout.scss'
 import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import jwtDecode from "jwt-decode";
@@ -24,9 +21,6 @@ const Layout:FC = ()=>{
     const location = useLocation()
     const dispatch =useDispatch()
     const [bol, setBol] = useState(false) 
-
-    const [locs, setLocs] = useState(localStorage.getItem('token') || '')
-
     const checkHoc = ()=>{
         check()
         .then((e:any)=>{
@@ -42,7 +36,7 @@ const Layout:FC = ()=>{
     
     const toks = useSelector((state:IReduceState)=>state.token.token)
 
-    useLayoutEffect(()=>{
+    useEffect(()=>{
         checkHoc()
     },[location])
         
@@ -71,16 +65,33 @@ const Layout:FC = ()=>{
     return(
         <div className="Layout">
             <div className="Layout__fixed">
-                <NavLink
-                className={({ isActive }) =>
-                isActive ? 'activeLink' : "Link"}
-                to={`/my/${toks?.email}`}>
-                    {toks?.email}
-                </NavLink>
-               <button className="Link" onClick={()=>{localStorage.removeItem('token'); checkHoc()}}>Выйти</button>
+                <div>
+                    <NavLink
+                    className={({ isActive }) =>
+                    isActive ? 'activeLink' : "Link"}
+                    to={`/my/${toks?.id}`}>
+                        {toks?.email}
+                    </NavLink>
+                    <NavLink
+                    className={({ isActive }) =>
+                    isActive ? 'activeLink' : "Link"}
+                    to={`/news`}>
+                        Новости
+                    </NavLink>
+                    <NavLink
+                    className={({ isActive }) =>
+                    isActive ? 'activeLink' : "Link"}
+                    to={`/chat`}>
+                        Мессенджер
+                    </NavLink>
+                </div>
+                <div>
+                    <button className="Link" onClick={()=>{localStorage.removeItem('token'); checkHoc()}}>Выйти</button>
+                </div>
             </div>
         </div>
     )
 }
+
 
 export default Layout

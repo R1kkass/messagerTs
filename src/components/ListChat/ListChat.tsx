@@ -1,8 +1,10 @@
-import { domen } from "Const/Const";
-import React, { memo, useEffect, useLayoutEffect, useRef } from "react";
+import axios from "axios";
+import { domen, URi } from "../../Const/Const";
+import jwtDecode from "jwt-decode";
+import React, { memo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { asyncChatAction, ASYNC_ADD_CHAT } from "../../store/chat";
+import { asyncChatAction, ASYNC_ADD_CHAT, chatAction } from "../../store/chat";
 import { IReduceState, IUnitChat } from "../../types/IReduce";
 import './ListChat.scss'
 
@@ -26,17 +28,20 @@ const ListChat = memo(()=>{
     const dispatch = useDispatch()
     const socket = useRef<WebSocket | null>(null)
     const listChat:IListChat = useSelector((state:IReduceState)=>state.chat.chats)
-    const user = useSelector((state:IReduceState)=>state.token.token)
 
+    const user:any =localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : localStorage.getItem('token')
 
-    const fetchs =async ()=>{
-        await dispatch(asyncChatAction())
-        console.log('v');
+    async function fetchChat(){
+        let tokensMain: any = jwtDecode(localStorage.getItem('token') || '')
         
+        const response = await axios.get(`${URi}/chat/getall?email=${tokensMain.email}`)
+        await dispatch(chatAction(response))
+        return response
     }
 
-    useLayoutEffect(()=>{
-        fetchs()
+
+    useEffect(()=>{
+        fetchChat()
     },[])
     
     function connect(){
@@ -54,7 +59,7 @@ const ListChat = memo(()=>{
         }
         
         socket.current.onmessage = (e)=>{    
-          fetchs()
+            fetchChat()
         }
         socket.current.onerror = ()=>{
           console.log('ошибка');
@@ -68,6 +73,12 @@ const ListChat = memo(()=>{
     useEffect(()=>{
       connect()
     },[])
+
+    if(!localStorage.getItem('token')){
+        return(
+            <div>Не авторизован</div>
+        )
+    }
 
     return(
         <div className="ListChat">

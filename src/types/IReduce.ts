@@ -1,5 +1,3 @@
-import { Interface } from "readline"
-
 export interface IReduceState{
     token:{
         token:{
@@ -15,14 +13,49 @@ export interface IReduceState{
     },
     mainInfo:{
         mainInfo: IMainInfo
+    },
+    news:{
+        news: INews
     }
+}
+
+export interface INews{
+    rows:[{
+        id: string,
+        userid: number,
+        text: string,
+        likes: number,
+        imgs:[{
+            id: number,
+            feedId: number,
+            fileName: string
+        }],
+        user: INewsUser,
+        name: string
+    }]
     
+} 
+
+export interface INewsUser{
+    id: number,
+    email: string,
+    role: string,
+    img: string,
+    name: string
+}
+
+export interface INewsImgs{
+    id: number,
+    feedId: number,
+    fileName: string
 }
 
 export interface IToken{
+    id: string,
     email: string,
     role: string,
-    img:string
+    img:string,
+    name: string
 }
 
 export interface IUnitChat{

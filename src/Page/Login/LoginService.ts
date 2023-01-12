@@ -22,10 +22,12 @@ export function logIn(email:string, password:string){
     return response
 }
 
-export function registration(email:string, password:string){
+export function registration(email:string, password:string, firstName: string, lastName: string){
     
     const response = axios.post(`${URi}/user/registration`, {
         password: password,
+        lastName: lastName,
+        firstName: firstName,
         email: email
     })
 

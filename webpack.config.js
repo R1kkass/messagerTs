@@ -3,12 +3,18 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: "./src/index.tsx",
-    //webpack-dev-server settings
-    devServer: {
-        static: {
-            contentBase: path.join(__dirname, "dist")
+    output: {
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist'),
+    },
+    optimization: {
+        splitChunks: {
+          chunks: 'all',
         },
-        port: 3001,
+      },
+    devServer: {
+        historyApiFallback: true,
+        port: 3003
     },
     module: {
         rules: [
@@ -46,15 +52,8 @@ module.exports = {
                    'sass-loader',
                 ]
              }
-
         ],
     },
-    /* Attempt to resolve these extensions in order.
-       If multiple files share the same name but have
-       different extensions, webpack will resolve the
-       one with the extension listed first in the
-       array and skip the rest.
-     */
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },
@@ -63,8 +62,4 @@ module.exports = {
             template: path.join(__dirname, 'public', 'index.html')
         })
     ],
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
-    },
 };

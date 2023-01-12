@@ -8,16 +8,20 @@ import createSagaMiddleware from "@redux-saga/core";
 import { rootWatcher } from "../saga";
 import { chatReducer } from "./chat";
 import { mainReducer } from "./main";
+import { newsReducer } from "./news";
+import { commentReducer } from "./comment";
 
 const sagaMiddleware = createSagaMiddleware()
 
-const rootReducers =combineReducers({
+const rootReducers = combineReducers({
     counter: counterReducer,
     messages: messageReducer,
     auth: authReducer,
     token: tokenReducer,
     chat: chatReducer,
-    mainInfo: mainReducer
+    mainInfo: mainReducer,
+    news: newsReducer,
+    comment: commentReducer
 })
 
 export const store = createStore(rootReducers, applyMiddleware(sagaMiddleware))

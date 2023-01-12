@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, memo, useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncChatAction } from "../../store/chat";
@@ -8,7 +8,7 @@ import './Visible.scss'
 
 
 interface IProps{
-    visible: boolean
+    visible: boolean,
 }
 
 interface IList{
@@ -23,7 +23,7 @@ type res={
     }
 }
 
-const VisibleWindow:FC<IProps>= ({visible})=>{
+const VisibleWindow:FC<IProps>= memo(({visible})=>{
 
     const user = useSelector((state:IReduceState)=>state.token.token)
     const [list,setList] = useState<any>([])
@@ -71,6 +71,6 @@ const VisibleWindow:FC<IProps>= ({visible})=>{
         <>
         </>
     )
-}
+})
 
 export default VisibleWindow

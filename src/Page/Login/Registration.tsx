@@ -1,12 +1,11 @@
-import React, { FC, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
+import React, { FC } from "react";
+import { useDispatch } from "react-redux";
 import { Button } from "react-bootstrap";
-import { logIn, registration } from "./LoginService";
-import Input from "../../components/Input/Input";
+import { registration } from "./LoginService";
 import './Login.scss'
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { tokenAction } from "../../store/token";
+import { Formik } from "formik";
 
 export interface ILoginRedux{
     auth: {
@@ -16,13 +15,9 @@ export interface ILoginRedux{
     }
 }
 
-
 const Registration:FC = () => {
-    const app  = useSelector((state:ILoginRedux)=>state.auth.firebase)
     document.title = "Регистрация"
     const navigate = useNavigate()
-    const password = useRef<HTMLInputElement | null>(null)
-    const loginInp = useRef<HTMLInputElement | null>(null)
     const dispatch = useDispatch()
     
     if(localStorage.getItem('token')){
@@ -36,8 +31,8 @@ const Registration:FC = () => {
         )
     }
 
-    const reg =async ()=>{
-        registration(loginInp.current?.value || '', password.current?.value || '')
+    const reg =async (email:string, password:string, firstName: string, lastName: string)=>{
+        registration(email, password, firstName, lastName)
         .then(()=>{
             navigate('/login')
             dispatch(tokenAction())
@@ -48,13 +43,79 @@ const Registration:FC = () => {
     return (
         <div className="Login">
             <div>
-                
                 <h2>Регистрация</h2>
-                <input type="text" ref={loginInp} placeholder="Логин"/>
-                <input type="password" ref={password} placeholder="Пароль"/>
-                <Button onClick={()=>{reg()}}>
-                    Регисрация
-                </Button>
+            <Formik
+            initialValues={{ email: '', password: '', lastName: '', firstName: '' }}
+            validate={values => {
+                const errors:any = {};
+                if (!values.email) {
+                errors.email = 'Required';
+                } else if (
+                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                ) {
+                errors.email = 'Неправильно введён Email';
+                }
+                return errors;
+            }}
+            onSubmit={(values, { setSubmitting }) => {
+                reg(values.email, values.password, values.firstName, values.lastName)
+            }}
+            >
+            {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+            }) => (
+                <form onSubmit={handleSubmit}>
+                <input
+                    type="firstName"
+                    name="firstName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.firstName}
+                    placeholder="Имя"
+                />
+                {errors.email && touched.email && errors.email}
+                <br/>   
+                <input
+                    type="lastName"
+                    name="lastName"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.lastName}
+                    placeholder="Фамилия"
+                />
+                {errors.email && touched.email && errors.email}
+                <br/>    
+                <input
+                    type="email"
+                    name="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
+                    placeholder="Почта"
+                />
+                {errors.email && touched.email && errors.email}
+                <br/>
+                <input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.password}
+                    placeholder="Пароль"
+                />
+                {errors.password && touched.password && errors.password}
+                    <Button type="submit" disabled={isSubmitting}>
+                        Вход
+                    </Button>
+                </form>
+            )}
+            </Formik>
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import { FetchOneUser } from "Page/Main/MainService"
+import { FetchOneUser } from "../Page/Main/MainService"
 import { call, put, takeEvery } from "redux-saga/effects"
 import { mainAction } from "../store/main"
 

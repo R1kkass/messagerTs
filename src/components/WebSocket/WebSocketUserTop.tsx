@@ -1,8 +1,8 @@
-import { domen } from "Const/Const";
-import React, { FC, memo, useEffect, useMemo, useRef } from "react";
+import { domen } from "../../Const/Const";
+import { FC, memo, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { IReduceState } from "types/IReduce";
+import { IReduceState } from "../../types/IReduce";
 
 export interface IListChat{
     listChat:{
@@ -23,6 +23,8 @@ interface IListUser{
 interface IList{
     secondUser: string,
     userCreator: string,
+    secondUserId: string,
+    userCreatorId: string,
     id: string
 }
 
@@ -46,14 +48,14 @@ const WebSocketUserTop:FC = memo(()=>{
                 {list ?
                 list[0]?.secondUser !== user?.email  ? 
                 <>
-                    <Link to={`/my/${list[0].secondUser}`}>
+                    <Link to={`/my/${list[0].secondUserId}`}>
                         <img src={`http://${domen}/${list[0]?.secondUser}.jpg`} alt=""/>
                         {list[0]?.secondUser}  
                     </Link>
                 </>
                 : 
                 <>
-                    <Link to={`/my/${list[0].userCreator}`}>
+                    <Link to={`/my/${list[0].userCreatorId}`}>
                         <img src={`http://${domen}/${list[0]?.userCreator}.jpg`} alt=""/>
                         {list[0]?.userCreator}
                     </Link>
