@@ -17,7 +17,7 @@ const ModalForEdit:FC<IProps> = memo(()=>{
 
     const dispatch = useDispatch()
     const user =useSelector((state: IReduceState)=>state.token.token)
-    const  func =async ()=>{
+    const func =async ()=>{
         console.log(user.id);
         
         const res:any = await FetchOneUser(user.id || '0')

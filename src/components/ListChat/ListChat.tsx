@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import React, { memo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { asyncChatAction, ASYNC_ADD_CHAT, chatAction } from "../../store/chat";
+import { chatAction } from "../../store/chat";
 import { IReduceState, IUnitChat } from "../../types/IReduce";
 import './ListChat.scss'
 
@@ -29,13 +29,14 @@ const ListChat = memo(()=>{
     const socket = useRef<WebSocket | null>(null)
     const listChat:IListChat = useSelector((state:IReduceState)=>state.chat.chats)
 
-    const user:any =localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : localStorage.getItem('token')
+   
 
-    async function fetchChat(){
+ const user:any =localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : localStorage.getItem('token')    
+ async function fetchChat(){
         let tokensMain: any = jwtDecode(localStorage.getItem('token') || '')
-        
         const response = await axios.get(`${URi}/chat/getall?email=${tokensMain.email}`)
         await dispatch(chatAction(response))
+        
         return response
     }
 
@@ -81,23 +82,23 @@ const ListChat = memo(()=>{
     }
 
     return(
-        <div className="ListChat">
+        <div  className="ListChat">
             {listChat?.data?.user?.map((list:any)=>(
-                <div className="ListChat__block">
-                    <Link to = {`/im/${list.idRoom}`}>
-                    {list.secondUser!==user.email ? 
+                <div data-testid="ListChat" className="ListChat__block">
+                    <Link to = {`/im/${list?.idRoom}`}>
+                    {list?.secondUser!==user?.email ? 
                     <>
                         <img className="Img__Creator" 
                             src={`http://${domen}/${list?.secondUser}.jpg`}
                             alt={list?.user}/>
                             <div>
-                            <div className="ListChat__secondUser">{list.secondUser}</div>
-                            <div className="ListChat__img" >
+                            <div className="ListChat__secondUser">{list?.secondUser}</div>
+                            <div className="ListChat__img">
                                 <img
-                                className="Img__lastUser" 
+                                className="Img__lastUser"
                                 src={`http://${domen}/${list?.lastUser}.jpg`}
                                 alt="" />
-                                <div>{list.lastMessage}</div>
+                                <div>{list?.lastMessage}</div>
                             </div>
                         </div>
                     </>
@@ -107,14 +108,14 @@ const ListChat = memo(()=>{
                     src={`http://${domen}/${list?.userCreator}.jpg`}
                     alt={list?.user}/>
                     <div>
-                        <div className="ListChat__secondUser">{list.userCreator}</div>
+                        <div className="ListChat__secondUser">{list?.userCreator}</div>
                         <div className="ListChat__img" >
                             <img
                             className="Img__lastUser" 
                             src={`http://${domen}/${list?.lastUser}.jpg`} 
                             alt=""
                             />
-                            <div>{list.lastMessage}</div>
+                            <div>{list?.lastMessage}</div>
                         </div>
                     </div>
                 </>

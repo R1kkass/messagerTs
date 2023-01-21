@@ -3,6 +3,7 @@ import Feed from "../../Page/Feed/Feed";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Main from "../Main/Main";
+import TestGraphQL from "components/TestGraphql";
 const News = lazy(() => import('../../Page/News/News'));
 const Login = lazy(() => import('../Login/Login'));
 const Registration = lazy(() => import('../Login/Registration'));
@@ -22,6 +23,8 @@ const MyRouter = ()=>{
               <Route path = "/registration" element = {<Registration/>}/>
               <Route path = "/news" element = {<News/>}/>
               <Route path = "/chat" element = {<Chat/>}/>
+              <Route path = "/test" element = {<TestGraphQL/>}/>
+
           </Routes>
           </Suspense>
         </>

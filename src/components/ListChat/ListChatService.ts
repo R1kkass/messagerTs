@@ -1,9 +1,6 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
-import { useSelector } from "react-redux";
-import { tokens, URi } from "../../Const/Const";
-import { IReduceState, IToken } from "../../types/IReduce";
-
+import {  URi } from "../../Const/Const";
 
 
 

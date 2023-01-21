@@ -3,10 +3,7 @@ import MainYourComponent from "../../components/MainYour/MainYourComponent";
 import NewsBlock from "../../components/NewsBlock/NewsBlock";
 import jwtDecode from "jwt-decode";
 import { FC, memo, useEffect, useRef } from "react";
-import { IToken } from "types/IReduce";
-import { useDispatch } from "react-redux";
-import { asyncNewsAction } from "store/news";
-import NewsUpdate from "components/NewsBlock/NewsUpdate";
+import NewsUpdate from "../../components/NewsBlock/NewsUpdate";
 
 const News:FC<{params?: {id: string}}> = memo(({params})=>{
 

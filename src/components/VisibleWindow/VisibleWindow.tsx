@@ -1,9 +1,10 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 import React, { FC, memo, useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncChatAction } from "../../store/chat";
-import { IReduceState } from "../../types/IReduce";
+import { IReduceState, IToken } from "../../types/IReduce";
 import './Visible.scss'
 
 
@@ -25,7 +26,7 @@ type res={
 
 const VisibleWindow:FC<IProps>= memo(({visible})=>{
 
-    const user = useSelector((state:IReduceState)=>state.token.token)
+    const user = useSelector((state:IReduceState)=> state.token.token)
     const [list,setList] = useState<any>([])
     
     async function fetchUser(){
@@ -36,7 +37,7 @@ const VisibleWindow:FC<IProps>= memo(({visible})=>{
     async function createChat(secondEmail: string) {
         const response:res = await axios.post('http://localhost:5001/api/chat/create',{
             secondEmail: secondEmail,
-            email: user.email
+            email: user?.email
         })   
     }
 
@@ -56,13 +57,17 @@ const VisibleWindow:FC<IProps>= memo(({visible})=>{
         <div className="VisibleMenu">
             {list.map((list:IList)=>(
                 <>
-                {(list.email !== user.email) ? 
-                <div onClick={()=>createChat(list.email)} className="VisibleMenu__unit">
+                {list?.email!==user?.email ? 
+                <div key={list.id} data-testid="visble" onClick={()=>createChat(list.email)} className="VisibleMenu__unit">
                 {list.email}
-            </div> : ''}
+            </div>
+            : 
+            ''    
+        }
             </>
                 
             ))}
+            Загрузить
         </div>
         )
     }

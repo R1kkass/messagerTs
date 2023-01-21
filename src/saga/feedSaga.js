@@ -6,10 +6,10 @@ import { asyncNewsAction, newsAction } from "../store/news";
 
 
 function* feedWorker(args){
+    yield console.log(args);
     const res = yield call(feedFetch, args)
     yield put(feedAction(res))
-    let a = yield call(fetchNews)
-    yield put(newsAction(a))
+
 }
 
 export function* feedWatcher(){

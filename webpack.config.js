@@ -7,14 +7,10 @@ module.exports = {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),
     },
-    optimization: {
-        splitChunks: {
-          chunks: 'all',
-        },
-      },
+
+
     devServer: {
         historyApiFallback: true,
-        port: 3003
     },
     module: {
         rules: [

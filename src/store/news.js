@@ -15,6 +15,6 @@ export const newsReducer = (state=initialState, action)=>{
 }
 
 export const newsAction = (payload) =>({type: ADD_NEWS, news: payload})
-export const asyncNewsAction = (payload) =>{
-    return {type: ASYNC_ADD_NEWS, payload: payload}
+export const asyncNewsAction = (payload, limit) =>{
+    return {type: ASYNC_ADD_NEWS, payload: [payload, limit]}
 }

@@ -10,7 +10,7 @@ const NewsUpdate = ()=>{
     const dispatch = useDispatch()
     const [bol, setBol]  =useState<boolean>()
     const socket = useRef<WebSocket | null>(null)
-
+    const [count, setCount] = useState<number>(0)
     function connect(){
         
         
@@ -33,6 +33,7 @@ const NewsUpdate = ()=>{
         socket.current.onmessage = ()=>{   
             console.log('message');
              setBol(true)
+             setCount(p=>p+1)
         }
         socket.current.onerror = ()=>{
           console.log('ошибка');
@@ -55,8 +56,11 @@ const NewsUpdate = ()=>{
     return (
         <>
             {bol ?
-             <div onClick={update}>
-                Обновить ленту
+             <div className="News__Update" onClick={update}>
+              <div>
+                Новых новостей {count}
+              </div>
+                
              </div>
             :
             ''

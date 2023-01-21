@@ -3,6 +3,7 @@ import MySlider from "../../components/MySlider/MySlider";
 import { domen } from "../../Const/Const";
 import { FC, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { Link } from "react-router-dom";
 
 
 const NewsBlockUnit:FC<any> = ({news})=>{
@@ -26,8 +27,12 @@ const NewsBlockUnit:FC<any> = ({news})=>{
                 <>
                 <div className="NewsBlock__text">
                     <div className="Text__user">
-                        <img src={`http://${domen}/${news?.user?.img}`} alt="" />
-                        <h3>{news?.user?.name}</h3>
+                        <Link to={`/my/${news?.user?.id}`}>
+                            <img src={`http://${domen}/${news?.user?.img}`} alt="" />
+                        </Link>
+                        <Link to={`/my/${news?.user?.id}`}>
+                            <h3>{news?.user?.name}</h3>
+                        </Link>
                     </div>
                     <div className="Text__text">{news?.text}</div>
                 </div>

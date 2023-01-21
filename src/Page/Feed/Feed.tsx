@@ -7,6 +7,7 @@ import { asyncFeedAction } from "../../store/feed";
 import { asyncNewsAction } from "../../store/news";
 import { IToken } from "../../types/IReduce";
 import "./Feed.scss"
+import { useParams } from "react-router-dom";
 
 const Feed = ()=>{
 
@@ -16,7 +17,7 @@ const Feed = ()=>{
     const photoRef = useRef<any>(null)
 
     const formData = new FormData()
-
+  const params = useParams()
     const fetchFeed =async ()=>{
         console.log(photoRef?.current?.files);
         
@@ -32,12 +33,19 @@ const Feed = ()=>{
          formData.delete('email')
          formData.delete('imgs')
          formData.delete('text')
-         dispatch(asyncNewsAction())
+         if(params.id){
+          await dispatch(asyncNewsAction(params))
+         }else{
+          await dispatch(asyncNewsAction())
+         }
+         
          const message = {
             event: 'newsAdd',
           }
           socket.current?.send(JSON.stringify(message))
     }
+
+
 
     const socket = useRef<WebSocket | null>(null)
 
@@ -76,7 +84,7 @@ const Feed = ()=>{
             <div className="Feed">
                 <label htmlFor="text">Текст записи</label>
                 <div className="Feed__contentEditable"
-                contentEditable="true" onInput={e => console.log('Text inside div', e.currentTarget.textContent)}
+                contentEditable="true" onInput={()=>console.log(text?.current?.textContent)}
                 id='text' ref={text} placeholder="Текст записи"/>
                 <label htmlFor="file">Прикрепить файл</label>
                 <input multiple ref={photoRef} type='file' id="file" accept=".jpg, .png, .jfif, .mp4"/>

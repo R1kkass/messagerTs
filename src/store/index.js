@@ -10,6 +10,8 @@ import { chatReducer } from "./chat";
 import { mainReducer } from "./main";
 import { newsReducer } from "./news";
 import { commentReducer } from "./comment";
+import { subReducer } from "./sub";
+import { limitReducer } from "./limit";
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -21,7 +23,9 @@ const rootReducers = combineReducers({
     chat: chatReducer,
     mainInfo: mainReducer,
     news: newsReducer,
-    comment: commentReducer
+    comment: commentReducer,
+    sub: subReducer,
+    limit: limitReducer
 })
 
 export const store = createStore(rootReducers, applyMiddleware(sagaMiddleware))

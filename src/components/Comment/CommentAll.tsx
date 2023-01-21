@@ -1,7 +1,8 @@
 import { domen } from "../../Const/Const";
-import React, { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { IUnitComment } from "./Comment";
 import { fetchComment } from "./CommentService";
+import { Link } from "react-router-dom";
 
 interface IAll{
     comment: IUnitComment[]
@@ -17,6 +18,12 @@ const CommentAll:FC<IAll> = ({comment})=>{
         setWidthCom(true)
     }
 
+    useEffect(()=>{
+        if(comments.length){
+            allComment()
+        }
+    }, [comment])
+    
     if(widthCom){
         return (
             <div>
@@ -27,21 +34,17 @@ const CommentAll:FC<IAll> = ({comment})=>{
                         </div>
                         <div>
                             <div className="Unit__name">
-                                {comment.user.name}
+                                <Link to={`/my/${comment.user.id}`}>{comment.user.name}</Link>
                             </div>
-                            <div className="Unit__text">
-                                {comment.text}
-                            </div>
+                            <div dangerouslySetInnerHTML={{__html: comment.text}} className="Unit__text" />
                         </div>
                         
                     </div>
                 ))}
-                
             </div>
         )
     }
 
-    
 
     return (
         <div>
@@ -53,10 +56,9 @@ const CommentAll:FC<IAll> = ({comment})=>{
                     </div>
                     <div>
                         <div className="Unit__name">
-                            {comment.user.name}
+                            <Link to={`/my/${comment.user.id}`}>{comment.user.name}</Link>
                         </div>
-                        <div className="Unit__text">
-                            {comment.text}
+                        <div dangerouslySetInnerHTML={{__html: comment.text}} className="Unit__text">
                         </div>
                     </div>
                     

@@ -1,11 +1,10 @@
-import React,{FC, memo, useEffect, useLayoutEffect, useState} from "react"
+import {FC, useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
 import './Layout.scss'
-import { Link, NavLink, useLocation, useParams } from "react-router-dom";
-import jwtDecode from "jwt-decode";
-import { check, checkAuth } from "./LayoutService";
+import { NavLink, useLocation } from "react-router-dom";
+
+import { check } from "./LayoutService";
 import { tokenAction } from "../../store/token";
-import { tokens } from "../../Const/Const";
 import { IReduceState } from "types/IReduce";
 
 export interface IUserReducer {

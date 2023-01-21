@@ -16,6 +16,23 @@ export interface IReduceState{
     },
     news:{
         news: INews
+    },
+    sub:{
+        sub: ISub[]
+    },
+    limit:{
+        limit: number
+    }
+}
+
+export interface ISub{
+    id: string,
+    userId: string,
+    user:{
+        id: string,
+        email: string,
+        name: string,
+        img: string
     }
 }
 
@@ -32,7 +49,8 @@ export interface INews{
         }],
         user: INewsUser,
         name: string
-    }]
+    }],
+    count: number
     
 } 
 
