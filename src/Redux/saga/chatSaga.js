@@ -1,5 +1,5 @@
 import { call, put, takeEvery } from "redux-saga/effects";
-import { fetchChat } from "../components/ListChat/ListChatService";
+import { fetchChat } from "../../components/ListChat/ListChatService";
 import { ASYNC_ADD_CHAT, chatAction } from "../store/chat";
 
 

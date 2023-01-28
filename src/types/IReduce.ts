@@ -1,3 +1,5 @@
+import { INewsBlockUnit } from "components/NewsBlock/NewsBlockUnit"
+
 export interface IReduceState{
     token:{
         token:{
@@ -15,10 +17,13 @@ export interface IReduceState{
         mainInfo: IMainInfo
     },
     news:{
-        news: INews
+        news: INews,
+        likes: INewsBlockUnit[],
+        comment: any[]
     },
     sub:{
-        sub: ISub[]
+        sub: ISub[],
+        ur: IUr[]
     },
     limit:{
         limit: number
@@ -36,21 +41,34 @@ export interface ISub{
     }
 }
 
+export interface IUr{
+    id: string,
+    userId: string,
+    user:string,
+    'user.id': string,
+    'user.name': string,
+    'user.img': string
+}
+
 export interface INews{
     rows:[{
         id: string,
         userid: number,
         text: string,
-        likes: number,
         imgs:[{
             id: number,
             feedId: number,
             fileName: string
         }],
         user: INewsUser,
-        name: string
+        name: string,
+        likes: [{
+            feedId: number,
+            count: number
+        }]
     }],
-    count: number
+    count: number,
+    
     
 } 
 

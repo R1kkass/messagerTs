@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 import React, { memo, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { chatAction } from "../../store/chat";
+import { chatAction } from "../../Redux/store/chat";
 import { IReduceState, IUnitChat } from "../../types/IReduce";
 import './ListChat.scss'
 
@@ -28,8 +28,6 @@ const ListChat = memo(()=>{
     const dispatch = useDispatch()
     const socket = useRef<WebSocket | null>(null)
     const listChat:IListChat = useSelector((state:IReduceState)=>state.chat.chats)
-
-   
 
  const user:any =localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : localStorage.getItem('token')    
  async function fetchChat(){

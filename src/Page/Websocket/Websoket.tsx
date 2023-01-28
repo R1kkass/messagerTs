@@ -6,7 +6,7 @@ import {useParams} from "react-router-dom"
 import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from "react-redux";
 import BlockMessage from "../../components/BlockMessage/BlockMessage";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../UI/Loader/Loader";
 import {IStateRedux} from "../../types/IRef"
 import jwtDecode from "jwt-decode";
 import { IReduceState } from "../../types/IReduce";

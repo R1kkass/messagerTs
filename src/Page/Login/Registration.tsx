@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import { registration } from "./LoginService";
 import './Login.scss'
 import { useNavigate } from "react-router-dom";
-import { tokenAction } from "../../store/token";
+import { tokenAction } from "../../Redux/store/token";
 import { Formik } from "formik";
 
 export interface ILoginRedux{

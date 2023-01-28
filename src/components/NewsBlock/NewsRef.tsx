@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { limitAction, limitReducer } from "store/limit";
-import { asyncNewsAction } from "../../store/news";
+import { limitAction, limitReducer } from "Redux/store/limit";
+import { asyncNewsAction } from "../../Redux/store/news";
 import { INews, IReduceState } from "../../types/IReduce";
 
 const NewsRef = () => {

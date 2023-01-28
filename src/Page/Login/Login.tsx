@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {getAuth, GoogleAuthProvider, signInWithPopup, signOut} from 'firebase/auth'
 import { Button } from "react-bootstrap";
 import { logIn } from "./LoginService";
-import Input from "../../components/Input/Input";
+import Input from "../../UI/Input/Input";
 import './Login.scss'
 import { redirect, useNavigate } from "react-router-dom";
-import { tokenAction } from "../../store/token";
+import { tokenAction } from "../../Redux/store/token";
 import { Formik } from "formik";
 
 export interface ILoginRedux{

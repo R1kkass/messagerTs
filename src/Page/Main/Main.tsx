@@ -4,7 +4,7 @@ import './Main.scss'
 import { Link, useLocation, useParams } from "react-router-dom";
 import { FetchOneUser } from "./MainService";
 import { IReduceState } from "../../types/IReduce";
-import { mainAction } from "../../store/main";
+import { mainAction } from "../../Redux/store/main";
 import News from "../News/News";
 
 export interface IUser{

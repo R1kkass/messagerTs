@@ -1,5 +1,5 @@
-import { feedFetch } from "../Page/Feed/FeedService";
-import { fetchNews } from "../Page/News/NewsService";
+import { feedFetch } from "../../Page/Feed/FeedService";
+import { fetchNews } from "../../Page/News/NewsService";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { ASYNC_ADD_FEED, feedAction } from "../store/feed";
 import { asyncNewsAction, newsAction } from "../store/news";

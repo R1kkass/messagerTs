@@ -1,5 +1,7 @@
 const initialState = {
-    news: []
+    news: [],
+    likes: [],
+    comment: []
 }
 
 export const ADD_NEWS = 'ADD_NEWS'
@@ -8,7 +10,7 @@ export const ASYNC_ADD_NEWS = 'ASYNC_ADD_NEWS'
 export const newsReducer = (state=initialState, action)=>{
     switch (action.type){
         case ADD_NEWS:
-            return {...state, news: action.news}
+            return {...state, news: action.news.feed, likes: action.news.likes, comment: action.news.comment}
         default:
             return state
     }

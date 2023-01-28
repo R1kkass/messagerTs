@@ -1,4 +1,4 @@
-import { check } from "../components/Layout/LayoutService";
+import { check } from "../../components/Layout/LayoutService";
 import {put,call,takeEvery} from "redux-saga/effects"
 import jwtDecode from "jwt-decode";
 

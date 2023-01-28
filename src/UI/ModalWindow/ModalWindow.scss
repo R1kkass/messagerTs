@@ -30,7 +30,7 @@
         width: 850px;
         height: 600px;
         min-width: 300px;
-        overflow: hidden;
+        overflow-y: auto;
         background-color: $main-color;
         border-radius: 20px;
         z-index: 999;

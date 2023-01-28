@@ -1,7 +1,7 @@
 import jwtDecode from "jwt-decode"
 import { useEffect, useRef, useState } from "react"
 import { useDispatch } from "react-redux"
-import { asyncNewsAction } from "../../store/news"
+import { asyncNewsAction } from "../../Redux/store/news"
 import { IToken } from "../../types/IReduce"
 
 

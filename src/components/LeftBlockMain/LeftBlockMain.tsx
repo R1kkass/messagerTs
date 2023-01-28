@@ -1,8 +1,8 @@
-import React, { FC, memo, useEffect, useLayoutEffect, useState } from "react";
+import React, { FC, memo, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mainAsyncAction } from "../../store/main";
+import { mainAsyncAction } from "../../Redux/store/main";
 import { domen } from "../../Const/Const";
-import { IReduceState, IToken } from "../../types/IReduce";
+import { IReduceState } from "../../types/IReduce";
 import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { checkSub, subscribeApi, unSub } from "./LeftBlockSevice";
@@ -24,7 +24,6 @@ const LeftBlockMain:FC = memo(()=>{
     async function subCheck(){
         const code:any =localStorage.getItem('token') ? jwtDecode(localStorage.getItem('token') || '') : localStorage.getItem('token')
          const resp:any = await checkSub(params.id || '', code.id || '')
-         console.log(resp?.message);
          setBool(resp?.message)
     }
 

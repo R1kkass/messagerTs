@@ -1,4 +1,4 @@
-const { fetchNews } = require("../Page/News/NewsService");
+const { fetchNews } = require("../../Page/News/NewsService");
 const { call, put, takeEvery } = require("redux-saga/effects");
 const { newsAction, ASYNC_ADD_NEWS } = require("../store/news");
 

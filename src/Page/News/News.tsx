@@ -39,6 +39,14 @@ const News:FC<{params?: {id: string}}> = memo(({params})=>{
     )
     }
 
+    if(!localStorage.getItem('token')){
+        return (
+            <div>
+                Вы не авторизованы
+            </div>
+        )
+    }
+
     return(
         <div className="Main">
             

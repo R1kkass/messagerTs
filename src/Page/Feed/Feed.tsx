@@ -1,10 +1,10 @@
-import ModalWindow from "../../components/ModalWindow/ModalWindow";
+import ModalWindow from "../../UI/ModalWindow/ModalWindow";
 import jwtDecode from "jwt-decode";
 import { useEffect, useRef } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { asyncFeedAction } from "../../store/feed";
-import { asyncNewsAction } from "../../store/news";
+import { asyncFeedAction } from "../../Redux/store/feed";
+import { asyncNewsAction } from "../../Redux/store/news";
 import { IToken } from "../../types/IReduce";
 import "./Feed.scss"
 import { useParams } from "react-router-dom";

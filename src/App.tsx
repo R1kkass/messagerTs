@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-import MyRouter from './Page/Routes/MyRoutes';
+import MyRouter from './Routes/MyRoutes';
 
 function App() {
 
@@ -9,7 +9,7 @@ function App() {
         <BrowserRouter>
           <Layout />
           <MyRouter />
-          </BrowserRouter>
+        </BrowserRouter>
       </div>
   );
 }

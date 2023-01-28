@@ -2,7 +2,8 @@ import jwtDecode from 'jwt-decode';
 import { FC, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { asyncNewsAction } from '../../store/news';
+import { useParams } from 'react-router-dom';
+import { asyncNewsAction } from '../../Redux/store/news';
 import { IReduceState, IToken } from '../../types/IReduce';
 import { addComment } from './CommentService';
 
@@ -13,6 +14,7 @@ const CommentInput:FC<{id: number}> = ({id}) =>{
     const [error, setError] = useState<string>('')
     const socket = useRef<WebSocket | null>(null)
     const dispatch = useDispatch()
+    const params = useParams()
 
     const addCommentR =async ()=>{
         const user:IToken = jwtDecode(localStorage.getItem('token') || '')
@@ -22,7 +24,7 @@ const CommentInput:FC<{id: number}> = ({id}) =>{
         }else{
             setError('Ошибка')
         }
-        await dispatch(asyncNewsAction(limit))
+        dispatch(asyncNewsAction(params, limit))
         
         const message = {
             event: 'newsAdd',

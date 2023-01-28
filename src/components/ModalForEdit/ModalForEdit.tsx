@@ -3,9 +3,9 @@ import React, { FC, memo, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { FetchOneUser } from "../../Page/Main/MainService";
-import { mainAction } from "../../store/main";
+import { mainAction } from "../../Redux/store/main";
 import { IReduceState, IToken } from "../../types/IReduce";
-import ModalWindow from "../ModalWindow/ModalWindow";
+import ModalWindow from "../../UI/ModalWindow/ModalWindow";
 import './ModalForEdit.scss'
 
 interface IProps{

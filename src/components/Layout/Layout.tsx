@@ -4,7 +4,7 @@ import './Layout.scss'
 import { NavLink, useLocation } from "react-router-dom";
 
 import { check } from "./LayoutService";
-import { tokenAction } from "../../store/token";
+import { tokenAction } from "../../Redux/store/token";
 import { IReduceState } from "types/IReduce";
 
 export interface IUserReducer {

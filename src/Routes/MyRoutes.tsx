@@ -1,13 +1,13 @@
-import Chat from "../../Page/Chat/Chat";
-import Feed from "../../Page/Feed/Feed";
+import Chat from "../Page/Chat/Chat";
+import Feed from "../Page/Feed/Feed";
 import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Main from "../Main/Main";
+import Main from "../Page/Main/Main";
 import TestGraphQL from "components/TestGraphql";
-const News = lazy(() => import('../../Page/News/News'));
-const Login = lazy(() => import('../Login/Login'));
-const Registration = lazy(() => import('../Login/Registration'));
-const Websoket = lazy(() => import('../Websocket/Websoket'));
+const News = lazy(() => import('../Page/News/News'));
+const Login = lazy(() => import('../Page/Login/Login'));
+const Registration = lazy(() => import('../Page/Login/Registration'));
+const Websoket = lazy(() => import('../Page/Websocket/Websoket'));
 
 const MyRouter = ()=>{
     return(

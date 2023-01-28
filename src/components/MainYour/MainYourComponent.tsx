@@ -3,11 +3,12 @@ import Feed from "../../Page/Feed/Feed";
 import { memo, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { mainAsyncAction } from "../../store/main";
+import { mainAsyncAction } from "../../Redux/store/main";
 import { domen } from "../../Const/Const";
 import { IToken } from "../../types/IReduce";
 import ModalForEdit from "../ModalForEdit/ModalForEdit";
-import VisibleWindow from "../VisibleWindow/VisibleWindow";
+import VisibleWindow from "../../UI/VisibleWindow/VisibleWindow";
+import LaftBlockAllSub from "components/LeftBlockMain/LeftBlockAllSub";
 
 const MainYourComponent = memo(()=>{
     const [visible,setVisible] = useState(false)
@@ -29,6 +30,8 @@ const MainYourComponent = memo(()=>{
                         <VisibleWindow visible={visible}/>
                         <ModalForEdit callback={users}/>
                         <Feed />
+                        <LaftBlockAllSub />
+                        <LaftBlockAllSub bol={true}/>
                     </div>
                 </div>
             </div>
