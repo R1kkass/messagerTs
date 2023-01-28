@@ -5,6 +5,8 @@
     &__img{
         width: 50px;
         border-radius: 50%;
+        height: 50px;
+        object-fit: cover;
     }
     &__secondUser{
         min-width: 100%;
@@ -103,7 +105,7 @@
                 cursor: pointer;
                 &:hover{
                     background: none;
-                    color: $main-color;;
+                    color: $main-color;
                     outline: 1px solid $main-color;
                 }
                 &:active{
@@ -139,10 +141,14 @@
             color: white;
             img{
                 margin-right: 20px;
-                width: 60px;
-                height: 60px;
+                width: 50px;
+                height: 50px;
                 object-fit: cover;
                 border-radius: 50%;
+            }
+            a{
+                text-decoration: none;
+                color: white;
             }
         }
     }

@@ -4,6 +4,7 @@
     display: grid;
     grid-template-columns: 265px 1fr;
     min-height: calc(100vh - 60px);
+
     &__info{
         
         p{
@@ -14,6 +15,7 @@
         div{
             display: flex;
             flex-direction: column;
+            z-index: 9;
         }
         img{
             display: flex;
@@ -31,8 +33,12 @@
             position: fixed;
             width: 265px;
             margin: 0 auto;
+            
             display: flex;
             align-items: center;
+            img{
+                object-fit: cover;
+            }
         }
         width: 265px;
     }

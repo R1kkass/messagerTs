@@ -1,21 +1,15 @@
-import React, { memo, useEffect, useState } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { IUserReducer } from "../../components/Layout/Layout";
-import * as auth from 'firebase/auth'
-import { IGoogle } from "../../types/IGoogle";
 import './Main.scss'
 import { Link, useLocation, useParams } from "react-router-dom";
-import jwtDecode from "jwt-decode";
 import { FetchOneUser } from "./MainService";
 import { IReduceState } from "../../types/IReduce";
-import MainYour from "../../components/MainYour/MainYour";
-import { domen, URi } from "../../Const/Const";
-import LeftBlockMain from "../../components/LeftBlockMain/LeftBlockMain";
-import { mainAction } from "../../store/main";
+import { mainAction } from "../../Redux/store/main";
+import News from "../News/News";
 
 export interface IUser{
     img: string,
+    name: string,
     email: string,
     displayName: string
 }
@@ -40,20 +34,15 @@ const Main = memo(()=>{
     },[location])
 
     
-    if(token?.email==userss?.email){
+    if(token?.email===userss?.email){
         return(
-            <MainYour user={userss}/>
+            <News params={params} />
         )
     }
 
     if(localStorage.getItem('token')){
     return(
-        <div className="Main">
-            <LeftBlockMain user={userss}/>
-            <div className="Main__block">
-                <Link to="/">123</Link>
-            </div>
-        </div>
+        <News params={params} />
     )
     }
 

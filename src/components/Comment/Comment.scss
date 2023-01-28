@@ -1,0 +1,55 @@
+@import '../../Styles/Variables.scss';
+
+.Comment{
+    &__inp{
+        display: flex;
+        padding: 5px;
+    }
+    &__input{
+        display: flex;
+        width: 100%;
+        min-height: 30px;
+        max-height: 200px;
+        overflow-y: auto;
+        height: 100%;
+        margin: 5px;
+        border: 1px solid $main-color;
+        border-radius: 5px;
+        div{
+            width: 100%;
+            color: black;
+            outline: none;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+    }
+    &__unit{
+        display: flex;
+        .Unit__Img{
+            padding: 10px;
+            img{
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+         
+        }
+        .Unit__name{
+            font-size: 14px;
+            font-weight: 600;
+            a{
+                text-decoration: none;
+                color: black;
+            }
+        }
+    }
+
+   
+}
+.Comment_ShowAll{    
+    cursor: pointer;
+    &:hover{
+        color: $main-color;
+    }
+}

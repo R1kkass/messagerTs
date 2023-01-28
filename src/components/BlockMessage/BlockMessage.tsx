@@ -1,9 +1,7 @@
-import { domen } from "Const/Const";
-import { reverse } from "dns/promises";
-import React, { memo, useEffect, useRef } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { domen } from "../../Const/Const";
+import { memo, useRef } from "react";
 import { useSelector } from "react-redux";
-import { IReduceState } from "types/IReduce";
+import { IReduceState } from "../../types/IReduce";
 import { IUserReducer } from "../Layout/Layout";
 
 interface IObj{

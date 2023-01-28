@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { tokens, URi } from "../../Const/Const";
-import { IReduceState, IToken } from "../../types/IReduce";
-
-let tokensMain: any = tokens
+import jwtDecode from "jwt-decode";
+import {  URi } from "../../Const/Const";
 
 
-export function fetchChat(){
-    const response = axios.get(`${URi}/chat/getall?email=${tokensMain.email}`)
+
+export async function fetchChat(){
+    let tokensMain: any = jwtDecode(localStorage.getItem('token') || '')
+    console.log(tokensMain);
+    
+    const response = await axios.get(`${URi}/chat/getall?email=${tokensMain.email}`)
     return response
 }

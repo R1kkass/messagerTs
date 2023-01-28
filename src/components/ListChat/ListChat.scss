@@ -4,6 +4,7 @@
     &__block{
         overflow: hidden;
         height: 60px;
+        
         display: flex;
         font-size: 16px;
 
@@ -31,9 +32,19 @@
     }
     &__img{
         display: flex;
+        
     }
     .Img__lastUser{
         width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+    .Img__Creator{
+        object-fit: cover;
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
         margin-right: 10px;
     }

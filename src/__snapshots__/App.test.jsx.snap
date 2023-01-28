@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TEST Components Modal TEST 1`] = `
+<div
+  class="ModalWindow my-node-exit my-node-exit-active"
+  data-testid="modalTest"
+>
+  <div
+    class="ModalWindow__window"
+    data-testid="modalHidden"
+  />
+  <div
+    class="ModalWindow__children"
+  />
+</div>
+`;

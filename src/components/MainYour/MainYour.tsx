@@ -1,14 +1,7 @@
 import React, { FC, memo, useState } from "react";
-import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { domen } from "../../Const/Const";
-import { ITokenTake } from "../../Page/Main/Main";
 import { IReduceState } from "../../types/IReduce";
 import ListChat from "../ListChat/ListChat";
-import ModalForEdit from "../ModalForEdit/ModalForEdit";
-import ModalWindow from "../ModalWindow/ModalWindow";
-import VisibleWindow from "../VisibleWindow/VisibleWindow";
 import MainYourComponent from "./MainYourComponent";
 
 interface IUser{
@@ -19,12 +12,8 @@ interface IUser{
     }
 }
 
-const MainYour:FC = memo(()=>{
-
-    const [visible, setVisible] = useState<boolean>(false)
-    
+const MainYour:FC<any> = memo(()=>{
     const user = useSelector((state:IReduceState)=>state.mainInfo.mainInfo)
-    console.log(user?.img);
 
     return(
         <div className="Main">

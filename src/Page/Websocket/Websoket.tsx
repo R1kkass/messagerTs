@@ -6,15 +6,12 @@ import {useParams} from "react-router-dom"
 import { useInView } from 'react-intersection-observer';
 import { useDispatch, useSelector } from "react-redux";
 import BlockMessage from "../../components/BlockMessage/BlockMessage";
-import Loader from "../../components/Loader/Loader";
+import Loader from "../../UI/Loader/Loader";
 import {IStateRedux} from "../../types/IRef"
-import { useAuthState } from "react-firebase-hooks/auth";
-import { IUserReducer } from "../../components/Layout/Layout";
 import jwtDecode from "jwt-decode";
-import { IReduceState, IToken } from "../../types/IReduce";
-import LeftBlockMain from "../../components/LeftBlockMain/LeftBlockMain";
+import { IReduceState } from "../../types/IReduce";
 import MainYourComponent from "../../components/MainYour/MainYourComponent";
-import WebSocketUserTop from "components/WebSocket/WebSocketUserTop";
+import WebSocketUserTop from "../../components/WebSocket/WebSocketUserTop";
 
 let limit = 0
 
@@ -48,8 +45,6 @@ const Websoket =memo(()=> {
       socket.current = new WebSocket("ws://localhost:5001/con")
       
       socket.current.onopen = ()=>{
-        
-        
           const message = {
             event: "connection",
             username: userTokenHS?.email,
@@ -66,7 +61,6 @@ const Websoket =memo(()=> {
 
       socket.current.onmessage = (e)=>{        
         const messagex = JSON.parse(e.data)
-        console.log(messagex);
         
         dispatch({type: 'SEND', action: messagex.rows})
         dispatch({type: 'COUNT', action: messagex.count})
@@ -142,7 +136,6 @@ const Websoket =memo(()=> {
       </div>
       )
     }
-    console.log(listChat);
     
 
   return (
